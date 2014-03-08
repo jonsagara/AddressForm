@@ -7,10 +7,10 @@ namespace AddressForm.MvcWeb.Models
     {
     }
 
-    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
+    public class AddressFormDbContext : IdentityDbContext<ApplicationUser>
     {
-        public ApplicationDbContext()
-            : base("DefaultConnection")
+        public AddressFormDbContext()
+            : base("name=AddressFormDbContext")
         {
         }
     }
