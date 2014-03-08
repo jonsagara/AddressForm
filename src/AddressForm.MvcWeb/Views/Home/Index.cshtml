@@ -1,10 +1,41 @@
-﻿@{
+﻿@model AddressForm.MvcWeb.Models.HomeIndexModel
+@{
     ViewBag.Title = "Home Page";
 }
-
 
 <div class="row">
     <div class="col-md-12">
         <h2>People</h2>
+
+        <div style="padding-bottom:15px;">@Html.ActionLink("New Person", "New", "People", null, new { @class = "btn btn-primary" })</div>
+
+        @if (Model.People.Count > 0)
+        {
+            <table class="table table-bordered table-condensed table-striped">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Address</th>
+                        <th>@* Intentionally blank for the Edit link *@</th>
+                        <th>@* Intentionally blank for the Delete link *@</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var person in Model.People.OrderBy(p => p.Name))
+                    {
+                        <tr>
+                            <td>@person.Name</td>
+                            <td>@person.ToSingleLineAddress()</td>
+                            <td>@Html.ActionLink("Edit", "Edit", "People", new { id = person.Id }, null)</td>
+                            <td>@Html.ActionLink("Delete", "Delete", "People", new { id = person.Id }, null)</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        else
+        {
+            <div>No people! Add some!</div>
+        }
     </div>
 </div>

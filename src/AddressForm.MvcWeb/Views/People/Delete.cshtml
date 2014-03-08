@@ -1,0 +1,27 @@
+﻿@model AddressForm.MvcWeb.Models.PeopleDeleteModel
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete <em>@Model.Name</em></h2>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="alert alert-danger">
+            <strong>Warning!</strong> You're about to delete <em>@Model.Name</em>. This is permanent, and cannot be undone. Are you sure you want to do this?
+        </div>
+
+        @using (Html.BeginForm("Delete", "People", null, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(m => m.Id)
+            @Html.HiddenFor(m => m.Name)
+
+            <div class="form-group">
+                <div class="col-md-12">
+                    <input type="submit" value="Delete Person" class="btn btn-primary" />
+                </div>
+            </div>
+        }
+    </div>
+</div>

@@ -1,7 +1,55 @@
-﻿
+﻿@model AddressForm.MvcWeb.Models.PersonEditorModel
 @{
-    ViewBag.Title = "New";
+    ViewBag.Title = "New Person";
 }
 
-<h2>New</h2>
+<h2>@ViewBag.Title</h2>
 
+@Html.Partial("_PersonEditorForm", Model)
+
+@section Scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script type="text/javascript">
+        $(function() {
+            var $regionDropDownListGroup = $("#region-dropdownlist-group"),
+                $regionDropDown = $("#RegionDropDownList"),
+                $regionTextBoxGroup = $("#region-textbox-group");
+
+            $("#Country").on("change", function() {
+                var country = $(this).val();
+                if (country === "US" || country === "CA") {
+                    $regionDropDown.empty();
+                    if (country === "US") {
+                        $.each(states, function(ix, elm) {
+                            $regionDropDown.append($("<option/>").val(elm.value).text(elm.text));
+                        });
+                    } else {
+                        $.each(provinces, function (ix, elm) {
+                            $regionDropDown.append($("<option/>").val(elm.value).text(elm.text));
+                        });
+                    }
+
+                    $regionDropDownListGroup.removeClass("hidden");
+                    $regionTextBoxGroup.addClass("hidden");
+                } else {
+                    $regionDropDownListGroup.addClass("hidden");
+                    $regionTextBoxGroup.removeClass("hidden");
+                }
+            });
+        });
+
+        var states = [];
+        @foreach (var state in Model.States)
+        {
+        <text>states.push({ text: "@state.Text", value: "@state.Value" });</text>
+        }
+
+        var provinces = [];
+        @foreach (var province in Model.Provinces)
+        {
+        <text>provinces.push({ text: "@province.Text", value: "@province.Value" });</text>
+        }
+    </script>
+}

@@ -1,12 +1,18 @@
-﻿using System.Web.Mvc;
+﻿using System.Data.Entity;
+using System.Threading.Tasks;
+using System.Web.Mvc;
+using AddressForm.MvcWeb.Models;
 
 namespace AddressForm.MvcWeb.Controllers
 {
     public class HomeController : AddressFormBaseController
     {
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
-            return View();
+            var model = new HomeIndexModel();
+            model.People.AddRange(await Context.People.ToListAsync());
+
+            return View(model);
         }
     }
 }

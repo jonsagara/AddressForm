@@ -1,0 +1,85 @@
+﻿@model AddressForm.MvcWeb.Models.PersonEditorModel
+@{
+    Layout = null;
+
+    var isNew = (Model.Id == Guid.Empty);
+    var actionName = isNew ? "New" : "Edit";
+    var submitButtonLabel = isNew ? "Create Person" : "Save Changes";
+
+    var isUsOrCanada = (Model.Country == "US" || Model.Country == "CA");
+}
+
+<div class="row">
+    <div class="col-md-9">
+        @using (Html.BeginForm(actionName, "People", null, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+        {
+            @Html.AntiForgeryToken()
+            <hr />
+            @Html.ValidationSummary(true)
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.Name, new { @class = "col-md-3 control-label" })
+                <div class="col-md-9">
+                    @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Name)
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.StreetAddress, new { @class = "col-md-3 control-label" })
+                <div class="col-md-9">
+                    @Html.TextBoxFor(m => m.StreetAddress, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.StreetAddress)
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.ExtendedAddress, new { @class = "col-md-3 control-label" })
+                <div class="col-md-9">
+                    @Html.TextBoxFor(m => m.ExtendedAddress, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.ExtendedAddress)
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Country, new { @class = "col-md-3 control-label" })
+                <div class="col-md-9">
+                    @Html.DropDownListFor(m => m.Country, Model.Countries, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Country)
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Locality, new { @class = "col-md-3 control-label" })
+                <div class="col-md-9">
+                    @Html.TextBoxFor(m => m.Locality, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Locality)
+                </div>
+            </div>
+
+            <div id="region-textbox-group" class="form-group @(isUsOrCanada ? "hidden" : string.Empty)">
+                @Html.LabelFor(m => m.RegionTextBox, new { @class = "col-md-3 control-label" })
+                <div class="col-md-9">
+                    @Html.TextBoxFor(m => m.RegionTextBox, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.RegionTextBox)
+                </div>
+            </div>
+            <div id="region-dropdownlist-group" class="form-group @(isUsOrCanada ? string.Empty : "hidden")">
+                @Html.LabelFor(m => m.RegionDropDownList, new { @class = "col-md-3 control-label" })
+                <div class="col-md-9">
+                    @Html.DropDownListFor(m => m.RegionDropDownList, Model.Regions, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.RegionDropDownList)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.PostalCode, new { @class = "col-md-3 control-label" })
+                <div class="col-md-9">
+                    @Html.TextBoxFor(m => m.PostalCode, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.PostalCode)
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-3 col-md-9">
+                    <input type="submit" value="@submitButtonLabel" class="btn btn-primary" />
+                </div>
+            </div>
+        }
+    </div>
+</div>

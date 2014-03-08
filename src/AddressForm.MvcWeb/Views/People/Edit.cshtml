@@ -1,0 +1,13 @@
+﻿@model AddressForm.MvcWeb.Models.PersonEditorModel
+@{
+    ViewBag.Title = "Edit " + @Model.Name;
+}
+
+<h2>@ViewBag.Title</h2>
+
+@Html.Partial("_PersonEditorForm", Model)
+
+@section Scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+}
