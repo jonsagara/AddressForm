@@ -178,6 +178,11 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201403082123061_CreateIdentityTables.cs" />
+    <Compile Include="Migrations\201403082123061_CreateIdentityTables.Designer.cs">
+      <DependentUpon>201403082123061_CreateIdentityTables.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AddressFormDbContext.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
@@ -243,6 +248,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201403082123061_CreateIdentityTables.resx">
+      <DependentUpon>201403082123061_CreateIdentityTables.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
