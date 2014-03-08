@@ -1,9 +1,8 @@
+using AddressForm.MvcWeb.Models.Seed;
+
 namespace AddressForm.MvcWeb.Migrations
 {
-    using System;
-    using System.Data.Entity;
     using System.Data.Entity.Migrations;
-    using System.Linq;
 
     internal sealed class Configuration : DbMigrationsConfiguration<AddressForm.MvcWeb.Models.AddressFormDbContext>
     {
@@ -14,6 +13,8 @@ namespace AddressForm.MvcWeb.Migrations
 
         protected override void Seed(AddressForm.MvcWeb.Models.AddressFormDbContext context)
         {
+            CountrySeeder.SeedCountries(context);
+            RegionSeeder.SeedRegions(context);
         }
     }
 }

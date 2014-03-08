@@ -1,0 +1,282 @@
+﻿using System.Linq;
+
+namespace AddressForm.MvcWeb.Models.Seed
+{
+    public static class CountrySeeder
+    {
+        public static void SeedCountries(AddressFormDbContext context)
+        {
+            SeedCountry(context, "AF", "AFG", "004", "ISO 3166-2:AF", "Afghanistan");
+            SeedCountry(context, "AX", "ALA", "248", "ISO 3166-2:AX", "Åland Islands");
+            SeedCountry(context, "AL", "ALB", "008", "ISO 3166-2:AL", "Albania");
+            SeedCountry(context, "DZ", "DZA", "012", "ISO 3166-2:DZ", "Algeria");
+            SeedCountry(context, "AS", "ASM", "016", "ISO 3166-2:AS", "American Samoa");
+            SeedCountry(context, "AD", "AND", "020", "ISO 3166-2:AD", "Andorra");
+            SeedCountry(context, "AO", "AGO", "024", "ISO 3166-2:AO", "Angola");
+            SeedCountry(context, "AI", "AIA", "660", "ISO 3166-2:AI", "Anguilla");
+            SeedCountry(context, "AQ", "ATA", "010", "ISO 3166-2:AQ", "Antarctica");
+            SeedCountry(context, "AG", "ATG", "028", "ISO 3166-2:AG", "Antigua and Barbuda");
+            SeedCountry(context, "AR", "ARG", "032", "ISO 3166-2:AR", "Argentina");
+            SeedCountry(context, "AM", "ARM", "051", "ISO 3166-2:AM", "Armenia");
+            SeedCountry(context, "AW", "ABW", "533", "ISO 3166-2:AW", "Aruba");
+            SeedCountry(context, "AU", "AUS", "036", "ISO 3166-2:AU", "Australia");
+            SeedCountry(context, "AT", "AUT", "040", "ISO 3166-2:AT", "Austria");
+            SeedCountry(context, "AZ", "AZE", "031", "ISO 3166-2:AZ", "Azerbaijan");
+            SeedCountry(context, "BS", "BHS", "044", "ISO 3166-2:BS", "Bahamas");
+            SeedCountry(context, "BH", "BHR", "048", "ISO 3166-2:BH", "Bahrain");
+            SeedCountry(context, "BD", "BGD", "050", "ISO 3166-2:BD", "Bangladesh");
+            SeedCountry(context, "BB", "BRB", "052", "ISO 3166-2:BB", "Barbados");
+            SeedCountry(context, "BY", "BLR", "112", "ISO 3166-2:BY", "Belarus");
+            SeedCountry(context, "BE", "BEL", "056", "ISO 3166-2:BE", "Belgium");
+            SeedCountry(context, "BZ", "BLZ", "084", "ISO 3166-2:BZ", "Belize");
+            SeedCountry(context, "BJ", "BEN", "204", "ISO 3166-2:BJ", "Benin");
+            SeedCountry(context, "BM", "BMU", "060", "ISO 3166-2:BM", "Bermuda");
+            SeedCountry(context, "BT", "BTN", "064", "ISO 3166-2:BT", "Bhutan");
+            SeedCountry(context, "BO", "BOL", "068", "ISO 3166-2:BO", "Bolivia, Plurinational State of");
+            SeedCountry(context, "BQ", "BES", "535", "ISO 3166-2:BQ", "Bonaire, Sint Eustatius and Saba");
+            SeedCountry(context, "BA", "BIH", "070", "ISO 3166-2:BA", "Bosnia and Herzegovina");
+            SeedCountry(context, "BW", "BWA", "072", "ISO 3166-2:BW", "Botswana");
+            SeedCountry(context, "BV", "BVT", "074", "ISO 3166-2:BV", "Bouvet Island");
+            SeedCountry(context, "BR", "BRA", "076", "ISO 3166-2:BR", "Brazil");
+            SeedCountry(context, "IO", "IOT", "086", "ISO 3166-2:IO", "British Indian Ocean Territory");
+            SeedCountry(context, "BN", "BRN", "096", "ISO 3166-2:BN", "Brunei Darussalam");
+            SeedCountry(context, "BG", "BGR", "100", "ISO 3166-2:BG", "Bulgaria");
+            SeedCountry(context, "BF", "BFA", "854", "ISO 3166-2:BF", "Burkina Faso");
+            SeedCountry(context, "BI", "BDI", "108", "ISO 3166-2:BI", "Burundi");
+            SeedCountry(context, "KH", "KHM", "116", "ISO 3166-2:KH", "Cambodia");
+            SeedCountry(context, "CM", "CMR", "120", "ISO 3166-2:CM", "Cameroon");
+            SeedCountry(context, "CA", "CAN", "124", "ISO 3166-2:CA", "Canada");
+            SeedCountry(context, "CV", "CPV", "132", "ISO 3166-2:CV", "Cape Verde");
+            SeedCountry(context, "KY", "CYM", "136", "ISO 3166-2:KY", "Cayman Islands");
+            SeedCountry(context, "CF", "CAF", "140", "ISO 3166-2:CF", "Central African Republic");
+            SeedCountry(context, "TD", "TCD", "148", "ISO 3166-2:TD", "Chad");
+            SeedCountry(context, "CL", "CHL", "152", "ISO 3166-2:CL", "Chile");
+            SeedCountry(context, "CN", "CHN", "156", "ISO 3166-2:CN", "China");
+            SeedCountry(context, "CX", "CXR", "162", "ISO 3166-2:CX", "Christmas Island");
+            SeedCountry(context, "CC", "CCK", "166", "ISO 3166-2:CC", "Cocos (Keeling) Islands");
+            SeedCountry(context, "CO", "COL", "170", "ISO 3166-2:CO", "Colombia");
+            SeedCountry(context, "KM", "COM", "174", "ISO 3166-2:KM", "Comoros");
+            SeedCountry(context, "CG", "COG", "178", "ISO 3166-2:CG", "Congo");
+            SeedCountry(context, "CD", "COD", "180", "ISO 3166-2:CD", "Congo, the Democratic Republic of the");
+            SeedCountry(context, "CK", "COK", "184", "ISO 3166-2:CK", "Cook Islands");
+            SeedCountry(context, "CR", "CRI", "188", "ISO 3166-2:CR", "Costa Rica");
+            SeedCountry(context, "CI", "CIV", "384", "ISO 3166-2:CI", "Côte d'Ivoire");
+            SeedCountry(context, "HR", "HRV", "191", "ISO 3166-2:HR", "Croatia");
+            SeedCountry(context, "CU", "CUB", "192", "ISO 3166-2:CU", "Cuba");
+            SeedCountry(context, "CW", "CUW", "531", "ISO 3166-2:CW", "Curaçao");
+            SeedCountry(context, "CY", "CYP", "196", "ISO 3166-2:CY", "Cyprus");
+            SeedCountry(context, "CZ", "CZE", "203", "ISO 3166-2:CZ", "Czech Republic");
+            SeedCountry(context, "DK", "DNK", "208", "ISO 3166-2:DK", "Denmark");
+            SeedCountry(context, "DJ", "DJI", "262", "ISO 3166-2:DJ", "Djibouti");
+            SeedCountry(context, "DM", "DMA", "212", "ISO 3166-2:DM", "Dominica");
+            SeedCountry(context, "DO", "DOM", "214", "ISO 3166-2:DO", "Dominican Republic");
+            SeedCountry(context, "EC", "ECU", "218", "ISO 3166-2:EC", "Ecuador");
+            SeedCountry(context, "EG", "EGY", "818", "ISO 3166-2:EG", "Egypt");
+            SeedCountry(context, "SV", "SLV", "222", "ISO 3166-2:SV", "El Salvador");
+            SeedCountry(context, "GQ", "GNQ", "226", "ISO 3166-2:GQ", "Equatorial Guinea");
+            SeedCountry(context, "ER", "ERI", "232", "ISO 3166-2:ER", "Eritrea");
+            SeedCountry(context, "EE", "EST", "233", "ISO 3166-2:EE", "Estonia");
+            SeedCountry(context, "ET", "ETH", "231", "ISO 3166-2:ET", "Ethiopia");
+            SeedCountry(context, "FK", "FLK", "238", "ISO 3166-2:FK", "Falkland Islands (Malvinas)");
+            SeedCountry(context, "FO", "FRO", "234", "ISO 3166-2:FO", "Faroe Islands");
+            SeedCountry(context, "FJ", "FJI", "242", "ISO 3166-2:FJ", "Fiji");
+            SeedCountry(context, "FI", "FIN", "246", "ISO 3166-2:FI", "Finland");
+            SeedCountry(context, "FR", "FRA", "250", "ISO 3166-2:FR", "France");
+            SeedCountry(context, "GF", "GUF", "254", "ISO 3166-2:GF", "French Guiana");
+            SeedCountry(context, "PF", "PYF", "258", "ISO 3166-2:PF", "French Polynesia");
+            SeedCountry(context, "TF", "ATF", "260", "ISO 3166-2:TF", "French Southern Territories");
+            SeedCountry(context, "GA", "GAB", "266", "ISO 3166-2:GA", "Gabon");
+            SeedCountry(context, "GM", "GMB", "270", "ISO 3166-2:GM", "Gambia");
+            SeedCountry(context, "GE", "GEO", "268", "ISO 3166-2:GE", "Georgia");
+            SeedCountry(context, "DE", "DEU", "276", "ISO 3166-2:DE", "Germany");
+            SeedCountry(context, "GH", "GHA", "288", "ISO 3166-2:GH", "Ghana");
+            SeedCountry(context, "GI", "GIB", "292", "ISO 3166-2:GI", "Gibraltar");
+            SeedCountry(context, "GR", "GRC", "300", "ISO 3166-2:GR", "Greece");
+            SeedCountry(context, "GL", "GRL", "304", "ISO 3166-2:GL", "Greenland");
+            SeedCountry(context, "GD", "GRD", "308", "ISO 3166-2:GD", "Grenada");
+            SeedCountry(context, "GP", "GLP", "312", "ISO 3166-2:GP", "Guadeloupe");
+            SeedCountry(context, "GU", "GUM", "316", "ISO 3166-2:GU", "Guam");
+            SeedCountry(context, "GT", "GTM", "320", "ISO 3166-2:GT", "Guatemala");
+            SeedCountry(context, "GG", "GGY", "831", "ISO 3166-2:GG", "Guernsey");
+            SeedCountry(context, "GN", "GIN", "324", "ISO 3166-2:GN", "Guinea");
+            SeedCountry(context, "GW", "GNB", "624", "ISO 3166-2:GW", "Guinea-Bissau");
+            SeedCountry(context, "GY", "GUY", "328", "ISO 3166-2:GY", "Guyana");
+            SeedCountry(context, "HT", "HTI", "332", "ISO 3166-2:HT", "Haiti");
+            SeedCountry(context, "HM", "HMD", "334", "ISO 3166-2:HM", "Heard Island and McDonald Islands");
+            SeedCountry(context, "VA", "VAT", "336", "ISO 3166-2:VA", "Holy See (Vatican City State)");
+            SeedCountry(context, "HN", "HND", "340", "ISO 3166-2:HN", "Honduras");
+            SeedCountry(context, "HK", "HKG", "344", "ISO 3166-2:HK", "Hong Kong");
+            SeedCountry(context, "HU", "HUN", "348", "ISO 3166-2:HU", "Hungary");
+            SeedCountry(context, "IS", "ISL", "352", "ISO 3166-2:IS", "Iceland");
+            SeedCountry(context, "IN", "IND", "356", "ISO 3166-2:IN", "India");
+            SeedCountry(context, "ID", "IDN", "360", "ISO 3166-2:ID", "Indonesia");
+            SeedCountry(context, "IR", "IRN", "364", "ISO 3166-2:IR", "Iran, Islamic Republic of");
+            SeedCountry(context, "IQ", "IRQ", "368", "ISO 3166-2:IQ", "Iraq");
+            SeedCountry(context, "IE", "IRL", "372", "ISO 3166-2:IE", "Ireland");
+            SeedCountry(context, "IM", "IMN", "833", "ISO 3166-2:IM", "Isle of Man");
+            SeedCountry(context, "IL", "ISR", "376", "ISO 3166-2:IL", "Israel");
+            SeedCountry(context, "IT", "ITA", "380", "ISO 3166-2:IT", "Italy");
+            SeedCountry(context, "JM", "JAM", "388", "ISO 3166-2:JM", "Jamaica");
+            SeedCountry(context, "JP", "JPN", "392", "ISO 3166-2:JP", "Japan");
+            SeedCountry(context, "JE", "JEY", "832", "ISO 3166-2:JE", "Jersey");
+            SeedCountry(context, "JO", "JOR", "400", "ISO 3166-2:JO", "Jordan");
+            SeedCountry(context, "KZ", "KAZ", "398", "ISO 3166-2:KZ", "Kazakhstan");
+            SeedCountry(context, "KE", "KEN", "404", "ISO 3166-2:KE", "Kenya");
+            SeedCountry(context, "KI", "KIR", "296", "ISO 3166-2:KI", "Kiribati");
+            SeedCountry(context, "KP", "PRK", "408", "ISO 3166-2:KP", "Korea, Democratic People's Republic of");
+            SeedCountry(context, "KR", "KOR", "410", "ISO 3166-2:KR", "Korea, Republic of");
+            SeedCountry(context, "KW", "KWT", "414", "ISO 3166-2:KW", "Kuwait");
+            SeedCountry(context, "KG", "KGZ", "417", "ISO 3166-2:KG", "Kyrgyzstan");
+            SeedCountry(context, "LA", "LAO", "418", "ISO 3166-2:LA", "Lao People's Democratic Republic");
+            SeedCountry(context, "LV", "LVA", "428", "ISO 3166-2:LV", "Latvia");
+            SeedCountry(context, "LB", "LBN", "422", "ISO 3166-2:LB", "Lebanon");
+            SeedCountry(context, "LS", "LSO", "426", "ISO 3166-2:LS", "Lesotho");
+            SeedCountry(context, "LR", "LBR", "430", "ISO 3166-2:LR", "Liberia");
+            SeedCountry(context, "LY", "LBY", "434", "ISO 3166-2:LY", "Libya");
+            SeedCountry(context, "LI", "LIE", "438", "ISO 3166-2:LI", "Liechtenstein");
+            SeedCountry(context, "LT", "LTU", "440", "ISO 3166-2:LT", "Lithuania");
+            SeedCountry(context, "LU", "LUX", "442", "ISO 3166-2:LU", "Luxembourg");
+            SeedCountry(context, "MO", "MAC", "446", "ISO 3166-2:MO", "Macao");
+            SeedCountry(context, "MK", "MKD", "807", "ISO 3166-2:MK", "Macedonia, the former Yugoslav Republic of");
+            SeedCountry(context, "MG", "MDG", "450", "ISO 3166-2:MG", "Madagascar");
+            SeedCountry(context, "MW", "MWI", "454", "ISO 3166-2:MW", "Malawi");
+            SeedCountry(context, "MY", "MYS", "458", "ISO 3166-2:MY", "Malaysia");
+            SeedCountry(context, "MV", "MDV", "462", "ISO 3166-2:MV", "Maldives");
+            SeedCountry(context, "ML", "MLI", "466", "ISO 3166-2:ML", "Mali");
+            SeedCountry(context, "MT", "MLT", "470", "ISO 3166-2:MT", "Malta");
+            SeedCountry(context, "MH", "MHL", "584", "ISO 3166-2:MH", "Marshall Islands");
+            SeedCountry(context, "MQ", "MTQ", "474", "ISO 3166-2:MQ", "Martinique");
+            SeedCountry(context, "MR", "MRT", "478", "ISO 3166-2:MR", "Mauritania");
+            SeedCountry(context, "MU", "MUS", "480", "ISO 3166-2:MU", "Mauritius");
+            SeedCountry(context, "YT", "MYT", "175", "ISO 3166-2:YT", "Mayotte");
+            SeedCountry(context, "MX", "MEX", "484", "ISO 3166-2:MX", "Mexico");
+            SeedCountry(context, "FM", "FSM", "583", "ISO 3166-2:FM", "Micronesia, Federated States of");
+            SeedCountry(context, "MD", "MDA", "498", "ISO 3166-2:MD", "Moldova, Republic of");
+            SeedCountry(context, "MC", "MCO", "492", "ISO 3166-2:MC", "Monaco");
+            SeedCountry(context, "MN", "MNG", "496", "ISO 3166-2:MN", "Mongolia");
+            SeedCountry(context, "ME", "MNE", "499", "ISO 3166-2:ME", "Montenegro");
+            SeedCountry(context, "MS", "MSR", "500", "ISO 3166-2:MS", "Montserrat");
+            SeedCountry(context, "MA", "MAR", "504", "ISO 3166-2:MA", "Morocco");
+            SeedCountry(context, "MZ", "MOZ", "508", "ISO 3166-2:MZ", "Mozambique");
+            SeedCountry(context, "MM", "MMR", "104", "ISO 3166-2:MM", "Myanmar");
+            SeedCountry(context, "NA", "NAM", "516", "ISO 3166-2:NA", "Namibia");
+            SeedCountry(context, "NR", "NRU", "520", "ISO 3166-2:NR", "Nauru");
+            SeedCountry(context, "NP", "NPL", "524", "ISO 3166-2:NP", "Nepal");
+            SeedCountry(context, "NL", "NLD", "528", "ISO 3166-2:NL", "Netherlands");
+            SeedCountry(context, "NC", "NCL", "540", "ISO 3166-2:NC", "New Caledonia");
+            SeedCountry(context, "NZ", "NZL", "554", "ISO 3166-2:NZ", "New Zealand");
+            SeedCountry(context, "NI", "NIC", "558", "ISO 3166-2:NI", "Nicaragua");
+            SeedCountry(context, "NE", "NER", "562", "ISO 3166-2:NE", "Niger");
+            SeedCountry(context, "NG", "NGA", "566", "ISO 3166-2:NG", "Nigeria");
+            SeedCountry(context, "NU", "NIU", "570", "ISO 3166-2:NU", "Niue");
+            SeedCountry(context, "NF", "NFK", "574", "ISO 3166-2:NF", "Norfolk Island");
+            SeedCountry(context, "MP", "MNP", "580", "ISO 3166-2:MP", "Northern Mariana Islands");
+            SeedCountry(context, "NO", "NOR", "578", "ISO 3166-2:NO", "Norway");
+            SeedCountry(context, "OM", "OMN", "512", "ISO 3166-2:OM", "Oman");
+            SeedCountry(context, "PK", "PAK", "586", "ISO 3166-2:PK", "Pakistan");
+            SeedCountry(context, "PW", "PLW", "585", "ISO 3166-2:PW", "Palau");
+            SeedCountry(context, "PS", "PSE", "275", "ISO 3166-2:PS", "Palestine, State of");
+            SeedCountry(context, "PA", "PAN", "591", "ISO 3166-2:PA", "Panama");
+            SeedCountry(context, "PG", "PNG", "598", "ISO 3166-2:PG", "Papua New Guinea");
+            SeedCountry(context, "PY", "PRY", "600", "ISO 3166-2:PY", "Paraguay");
+            SeedCountry(context, "PE", "PER", "604", "ISO 3166-2:PE", "Peru");
+            SeedCountry(context, "PH", "PHL", "608", "ISO 3166-2:PH", "Philippines");
+            SeedCountry(context, "PN", "PCN", "612", "ISO 3166-2:PN", "Pitcairn");
+            SeedCountry(context, "PL", "POL", "616", "ISO 3166-2:PL", "Poland");
+            SeedCountry(context, "PT", "PRT", "620", "ISO 3166-2:PT", "Portugal");
+            SeedCountry(context, "PR", "PRI", "630", "ISO 3166-2:PR", "Puerto Rico");
+            SeedCountry(context, "QA", "QAT", "634", "ISO 3166-2:QA", "Qatar");
+            SeedCountry(context, "RE", "REU", "638", "ISO 3166-2:RE", "Réunion");
+            SeedCountry(context, "RO", "ROU", "642", "ISO 3166-2:RO", "Romania");
+            SeedCountry(context, "RU", "RUS", "643", "ISO 3166-2:RU", "Russian Federation");
+            SeedCountry(context, "RW", "RWA", "646", "ISO 3166-2:RW", "Rwanda");
+            SeedCountry(context, "BL", "BLM", "652", "ISO 3166-2:BL", "Saint Barthélemy");
+            SeedCountry(context, "SH", "SHN", "654", "ISO 3166-2:SH", "Saint Helena, Ascension and Tristan da Cunha");
+            SeedCountry(context, "KN", "KNA", "659", "ISO 3166-2:KN", "Saint Kitts and Nevis");
+            SeedCountry(context, "LC", "LCA", "662", "ISO 3166-2:LC", "Saint Lucia");
+            SeedCountry(context, "MF", "MAF", "663", "ISO 3166-2:MF", "Saint Martin (French part)");
+            SeedCountry(context, "PM", "SPM", "666", "ISO 3166-2:PM", "Saint Pierre and Miquelon");
+            SeedCountry(context, "VC", "VCT", "670", "ISO 3166-2:VC", "Saint Vincent and the Grenadines");
+            SeedCountry(context, "WS", "WSM", "882", "ISO 3166-2:WS", "Samoa");
+            SeedCountry(context, "SM", "SMR", "674", "ISO 3166-2:SM", "San Marino");
+            SeedCountry(context, "ST", "STP", "678", "ISO 3166-2:ST", "Sao Tome and Principe");
+            SeedCountry(context, "SA", "SAU", "682", "ISO 3166-2:SA", "Saudi Arabia");
+            SeedCountry(context, "SN", "SEN", "686", "ISO 3166-2:SN", "Senegal");
+            SeedCountry(context, "RS", "SRB", "688", "ISO 3166-2:RS", "Serbia");
+            SeedCountry(context, "SC", "SYC", "690", "ISO 3166-2:SC", "Seychelles");
+            SeedCountry(context, "SL", "SLE", "694", "ISO 3166-2:SL", "Sierra Leone");
+            SeedCountry(context, "SG", "SGP", "702", "ISO 3166-2:SG", "Singapore");
+            SeedCountry(context, "SX", "SXM", "534", "ISO 3166-2:SX", "Sint Maarten (Dutch part)");
+            SeedCountry(context, "SK", "SVK", "703", "ISO 3166-2:SK", "Slovakia");
+            SeedCountry(context, "SI", "SVN", "705", "ISO 3166-2:SI", "Slovenia");
+            SeedCountry(context, "SB", "SLB", "090", "ISO 3166-2:SB", "Solomon Islands");
+            SeedCountry(context, "SO", "SOM", "706", "ISO 3166-2:SO", "Somalia");
+            SeedCountry(context, "ZA", "ZAF", "710", "ISO 3166-2:ZA", "South Africa");
+            SeedCountry(context, "GS", "SGS", "239", "ISO 3166-2:GS", "South Georgia and the South Sandwich Islands");
+            SeedCountry(context, "SS", "SSD", "728", "ISO 3166-2:SS", "South Sudan");
+            SeedCountry(context, "ES", "ESP", "724", "ISO 3166-2:ES", "Spain");
+            SeedCountry(context, "LK", "LKA", "144", "ISO 3166-2:LK", "Sri Lanka");
+            SeedCountry(context, "SD", "SDN", "729", "ISO 3166-2:SD", "Sudan");
+            SeedCountry(context, "SR", "SUR", "740", "ISO 3166-2:SR", "Suriname");
+            SeedCountry(context, "SJ", "SJM", "744", "ISO 3166-2:SJ", "Svalbard and Jan Mayen");
+            SeedCountry(context, "SZ", "SWZ", "748", "ISO 3166-2:SZ", "Swaziland");
+            SeedCountry(context, "SE", "SWE", "752", "ISO 3166-2:SE", "Sweden");
+            SeedCountry(context, "CH", "CHE", "756", "ISO 3166-2:CH", "Switzerland");
+            SeedCountry(context, "SY", "SYR", "760", "ISO 3166-2:SY", "Syrian Arab Republic");
+            SeedCountry(context, "TW", "TWN", "158", "ISO 3166-2:TW", "Taiwan, Province of China");
+            SeedCountry(context, "TJ", "TJK", "762", "ISO 3166-2:TJ", "Tajikistan");
+            SeedCountry(context, "TZ", "TZA", "834", "ISO 3166-2:TZ", "Tanzania, United Republic of");
+            SeedCountry(context, "TH", "THA", "764", "ISO 3166-2:TH", "Thailand");
+            SeedCountry(context, "TL", "TLS", "626", "ISO 3166-2:TL", "Timor-Leste");
+            SeedCountry(context, "TG", "TGO", "768", "ISO 3166-2:TG", "Togo");
+            SeedCountry(context, "TK", "TKL", "772", "ISO 3166-2:TK", "Tokelau");
+            SeedCountry(context, "TO", "TON", "776", "ISO 3166-2:TO", "Tonga");
+            SeedCountry(context, "TT", "TTO", "780", "ISO 3166-2:TT", "Trinidad and Tobago");
+            SeedCountry(context, "TN", "TUN", "788", "ISO 3166-2:TN", "Tunisia");
+            SeedCountry(context, "TR", "TUR", "792", "ISO 3166-2:TR", "Turkey");
+            SeedCountry(context, "TM", "TKM", "795", "ISO 3166-2:TM", "Turkmenistan");
+            SeedCountry(context, "TC", "TCA", "796", "ISO 3166-2:TC", "Turks and Caicos Islands");
+            SeedCountry(context, "TV", "TUV", "798", "ISO 3166-2:TV", "Tuvalu");
+            SeedCountry(context, "UG", "UGA", "800", "ISO 3166-2:UG", "Uganda");
+            SeedCountry(context, "UA", "UKR", "804", "ISO 3166-2:UA", "Ukraine");
+            SeedCountry(context, "AE", "ARE", "784", "ISO 3166-2:AE", "United Arab Emirates");
+            SeedCountry(context, "GB", "GBR", "826", "ISO 3166-2:GB", "United Kingdom");
+            SeedCountry(context, "US", "USA", "840", "ISO 3166-2:US", "United States");
+            SeedCountry(context, "UM", "UMI", "581", "ISO 3166-2:UM", "United States Minor Outlying Islands");
+            SeedCountry(context, "UY", "URY", "858", "ISO 3166-2:UY", "Uruguay");
+            SeedCountry(context, "UZ", "UZB", "860", "ISO 3166-2:UZ", "Uzbekistan");
+            SeedCountry(context, "VU", "VUT", "548", "ISO 3166-2:VU", "Vanuatu");
+            SeedCountry(context, "VE", "VEN", "862", "ISO 3166-2:VE", "Venezuela, Bolivarian Republic of");
+            SeedCountry(context, "VN", "VNM", "704", "ISO 3166-2:VN", "Viet Nam");
+            SeedCountry(context, "VG", "VGB", "092", "ISO 3166-2:VG", "Virgin Islands, British");
+            SeedCountry(context, "VI", "VIR", "850", "ISO 3166-2:VI", "Virgin Islands, U.S.");
+            SeedCountry(context, "WF", "WLF", "876", "ISO 3166-2:WF", "Wallis and Futuna");
+            SeedCountry(context, "EH", "ESH", "732", "ISO 3166-2:EH", "Western Sahara");
+            SeedCountry(context, "YE", "YEM", "887", "ISO 3166-2:YE", "Yemen");
+            SeedCountry(context, "ZM", "ZMB", "894", "ISO 3166-2:ZM", "Zambia");
+            SeedCountry(context, "ZW", "ZWE", "716", "ISO 3166-2:ZW", "Zimbabwe");
+
+        }
+
+        private static void SeedCountry(AddressFormDbContext context, string id, string alpha3Code, string numericCode, string iso3166_2Code, string name)
+        {
+            var country = context.Countries.SingleOrDefault(c => c.Id == id);
+            if (country != null)
+            {
+                return;
+            }
+
+            country = new Country
+            {
+                Id = id,
+                Alpha3Code = alpha3Code,
+                NumericCode = numericCode,
+                Iso3166_2Code = iso3166_2Code,
+                Name = name
+            };
+
+            context.Countries.Add(country);
+            context.SaveChanges();
+        }
+    }
+}
