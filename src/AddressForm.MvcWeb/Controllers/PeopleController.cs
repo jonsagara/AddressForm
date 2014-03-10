@@ -1,14 +1,55 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using AddressForm.MvcWeb.Models;
 using AutoMapper;
+using Newtonsoft.Json;
 
 namespace AddressForm.MvcWeb.Controllers
 {
+    /// <summary>
+    /// JSON converter for IDictionary that ignores the contract resolver (e.g. CamelCasePropertyNamesContractResolver)
+    /// when converting dictionary keys to property names.
+    /// </summary>
+    public class DictionaryKeysAreNotPropertyNamesJsonConverter : JsonConverter
+    {
+        public override bool CanConvert(Type objectType)
+        {
+            return typeof(IDictionary).IsAssignableFrom(objectType);
+        }
+
+        public override bool CanRead
+        {
+            get { return false; }
+        }
+
+        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+        {
+            throw new InvalidOperationException();
+        }
+
+        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+        {
+            IDictionary dictionary = (IDictionary)value;
+
+            writer.WriteStartObject();
+
+            foreach (DictionaryEntry entry in dictionary)
+            {
+                string key = Convert.ToString(entry.Key, CultureInfo.InvariantCulture);
+                writer.WritePropertyName(key);
+                serializer.Serialize(writer, entry.Value);
+            }
+
+            writer.WriteEndObject();
+        }
+    }
+
     public class PeopleController : AddressFormBaseController
     {
         public async Task<ActionResult> New()
@@ -21,11 +62,10 @@ namespace AddressForm.MvcWeb.Controllers
             };
 
             model.Countries.AddRange(Mapper.Map<List<SelectListItem>>(await Context.Countries.OrderBy(c => c.Name).ToListAsync()));
-            model.Regions.AddRange(Mapper.Map<List<SelectListItem>>(await Context.Regions.Where(r => r.CountryId == model.Country).OrderBy(n => n.Name).ToListAsync()));
-
-            model.States.AddRange(Mapper.Map<List<SelectListItem>>(await Context.Regions.Where(r => r.CountryId == "US").OrderBy(n => n.Name).ToListAsync()));
-            model.Provinces.AddRange(Mapper.Map<List<SelectListItem>>(await Context.Regions.Where(r => r.CountryId == "CA").OrderBy(n => n.Name).ToListAsync()));
-
+            model.RegionsByCountry = (await Context.Regions.ToListAsync())
+                .GroupBy(kvp => kvp.CountryId)
+                .ToDictionary(grp => grp.Key, grp => grp.OrderBy(r => r.Name).Select(r => new SelectListItem { Text = r.Name, Value = r.Abbreviation }).ToList());
+            
             return View(model);
         }
 
@@ -57,7 +97,9 @@ namespace AddressForm.MvcWeb.Controllers
 
             var model = Mapper.Map<Person, PersonEditorModel>(person);
             model.Countries.AddRange(Mapper.Map<List<SelectListItem>>(await Context.Countries.OrderBy(c => c.Name).ToListAsync()));
-            model.Regions.AddRange(Mapper.Map<List<SelectListItem>>(await Context.Regions.Where(r => r.CountryId == model.Country).OrderBy(n => n.Name).ToListAsync()));
+            model.RegionsByCountry = (await Context.Regions.ToListAsync())
+                .GroupBy(kvp => kvp.CountryId)
+                .ToDictionary(grp => grp.Key, grp => grp.OrderBy(r => r.Name).Select(r => new SelectListItem { Text = r.Name, Value = r.Abbreviation }).ToList());
 
             return View(model);
         }

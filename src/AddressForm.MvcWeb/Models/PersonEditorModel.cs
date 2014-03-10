@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using System.Web.Mvc;
+using Newtonsoft.Json;
 
 namespace AddressForm.MvcWeb.Models
 {
@@ -44,18 +46,30 @@ namespace AddressForm.MvcWeb.Models
         public string Country { get; set; }
 
         public List<SelectListItem> Countries { get; private set; }
-        public List<SelectListItem> Regions { get; private set; }
 
-        public List<SelectListItem> States { get; private set; }
-        public List<SelectListItem> Provinces { get; private set; }
+        public Dictionary<string, List<SelectListItem>> RegionsByCountry { get; set; }
+
+        public string RegionsByCountryJson
+        {
+            get
+            {
+                if (RegionsByCountry == null)
+                {
+                    throw new InvalidOperationException("You must populate RegionsByCountry before calling RegionsByCountryJson");
+                }
+
+                // Trying to be good JavaScript citizens by camel casing our JSON. Can't use the built-in
+                //  camel case contract resolver because it also lower cases the dictionary keys.
+                return JsonConvert.SerializeObject(
+                    RegionsByCountry.ToDictionary(kvp => kvp.Key, kvp => kvp.Value.Select(sli => new { text = sli.Text, value = sli.Value, selected = sli.Selected }))
+                );
+            }
+        }
+
 
         public PersonEditorModel()
         {
             Countries = new List<SelectListItem>();
-            Regions = new List<SelectListItem>();
-
-            States = new List<SelectListItem>();
-            Provinces = new List<SelectListItem>();
         }
 
         /// <summary>

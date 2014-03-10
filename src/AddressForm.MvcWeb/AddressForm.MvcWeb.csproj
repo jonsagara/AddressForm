@@ -278,6 +278,7 @@
     <Content Include="Views\People\Edit.cshtml" />
     <Content Include="Views\People\Delete.cshtml" />
     <Content Include="Views\People\_PersonEditorForm.cshtml" />
+    <Content Include="Views\People\_PersonEditorFormScripts.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

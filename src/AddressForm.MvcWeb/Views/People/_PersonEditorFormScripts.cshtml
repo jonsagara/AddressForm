@@ -1,0 +1,35 @@
+﻿@model AddressForm.MvcWeb.Models.PersonEditorModel
+@{
+    Layout = null;
+}
+
+@Scripts.Render("~/bundles/jqueryval")
+
+<script type="text/javascript">
+    $(function() {
+        var $regionDropDownListGroup = $("#region-dropdownlist-group"),
+            $regionDropDown = $("#RegionDropDownList"),
+            $regionTextBoxGroup = $("#region-textbox-group");
+
+        $("#Country").on("change", function() {
+            var country = $(this).val(),
+                countryRegions = regionsByCountry[country];
+
+            if (countryRegions !== undefined && countryRegions !== null && countryRegions.length > 0) {
+                $regionDropDown.empty();
+
+                $.each(countryRegions, function (ix, elm) {
+                    $regionDropDown.append($("<option/>").val(elm.value).text(elm.text));
+                });
+
+                $regionDropDownListGroup.removeClass("hidden");
+                $regionTextBoxGroup.addClass("hidden");
+            } else {
+                $regionDropDownListGroup.addClass("hidden");
+                $regionTextBoxGroup.removeClass("hidden");
+            }
+        });
+    });
+
+    var regionsByCountry = JSON.parse(@Html.Raw(Json.Encode(Model.RegionsByCountryJson)));
+</script>

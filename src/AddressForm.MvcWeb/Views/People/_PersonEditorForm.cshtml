@@ -63,7 +63,7 @@
             <div id="region-dropdownlist-group" class="form-group @(isUsOrCanada ? string.Empty : "hidden")">
                 @Html.LabelFor(m => m.RegionDropDownList, new { @class = "col-md-3 control-label" })
                 <div class="col-md-9">
-                    @Html.DropDownListFor(m => m.RegionDropDownList, Model.Regions, new { @class = "form-control" })
+                    @Html.DropDownListFor(m => m.RegionDropDownList, (isUsOrCanada ? Model.RegionsByCountry[Model.Country] : new List<SelectListItem>()), new { @class = "form-control" })
                     @Html.ValidationMessageFor(m => m.RegionDropDownList)
                 </div>
             </div>
