@@ -184,12 +184,13 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PeopleController.cs" />
     <Compile Include="Extensions\PersonExtensions.cs" />
+    <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Mapping\CountryRegionProfile.cs" />
     <Compile Include="Mapping\PersonProfile.cs" />
-    <Compile Include="Mapping\RegionResolver.cs" />
+    <Compile Include="Mapping\RegionResolvers.cs" />
     <Compile Include="Migrations\201403082123061_CreateIdentityTables.cs" />
     <Compile Include="Migrations\201403082123061_CreateIdentityTables.Designer.cs">
       <DependentUpon>201403082123061_CreateIdentityTables.cs</DependentUpon>

@@ -30,11 +30,11 @@ namespace AddressForm.MvcWeb.Models
         public string Locality { get; set; }
 
         [StringLength(50)]
-        [Display(Name = "State/Province")]
+        [Display(Name = "State/Province/Region")]
         public string RegionTextBox { get; set; }
 
         [StringLength(50)]
-        [Display(Name = "State/Province")]
+        [Display(Name = "State/Province/Region")]
         public string RegionDropDownList { get; set; }
 
         [StringLength(30)]
