@@ -47,6 +47,11 @@ namespace AddressForm.MvcWeb.Models
 
         public List<SelectListItem> Countries { get; private set; }
 
+        /// <summary>
+        /// Dictionary of Lists of Regions by Country.
+        /// Key: Two-character country code.
+        /// Value: List&lt;SelectListItem&gt; containing states/provinces populated from the Regions table.
+        /// </summary>
         public Dictionary<string, List<SelectListItem>> RegionsByCountry { get; set; }
 
         public string RegionsByCountryJson
@@ -60,8 +65,6 @@ namespace AddressForm.MvcWeb.Models
 
                 // Trying to be good JavaScript citizens by camel casing our JSON. Can't use the built-in
                 //  camel case contract resolver because it also lower cases the dictionary keys.
-                // KEY: Two-character country code.
-                // VALUE: List<SelectListItem> containing states/provinces for countries in the Regions table.
                 return JsonConvert.SerializeObject(
                     RegionsByCountry.ToDictionary(kvp => kvp.Key, kvp => kvp.Value.Select(sli => new { text = sli.Text, value = sli.Value, selected = sli.Selected }))
                 );
