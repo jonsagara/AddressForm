@@ -9,11 +9,19 @@
     $(function() {
         var $regionDropDownListGroup = $("#region-dropdownlist-group"),
             $regionDropDown = $("#RegionDropDownList"),
-            $regionTextBoxGroup = $("#region-textbox-group");
+            $regionTextBoxGroup = $("#region-textbox-group"),
+            $countryDdl = $("#Country"),
+            selectedRegion = {};
 
+        // Initialize with the currently-selected region for the country.
+        selectedRegion["@Model.Country"] = "@Model.RegionDropDownList";
+
+        // On country selection changed, show/hide the dropdownlist/textbox depending on
+        //  whether the selected country has states/provinces/regions defined.
         $("#Country").on("change", function() {
             var country = $(this).val(),
-                countryRegions = regionsByCountry[country];
+                countryRegions = regionsByCountry[country],
+                prevSelectedRegion = selectedRegion[country];
 
             if (countryRegions !== undefined && countryRegions !== null && countryRegions.length > 0) {
                 $regionDropDown.empty();
@@ -22,12 +30,26 @@
                     $regionDropDown.append($("<option/>").val(elm.value).text(elm.text));
                 });
 
+                // If there is a previously selected state for this country, select it in the ddl.
+                if (prevSelectedRegion !== undefined && prevSelectedRegion !== null && prevSelectedRegion.length > 0) {
+                    $regionDropDown.val(prevSelectedRegion);
+                }
+
                 $regionDropDownListGroup.removeClass("hidden");
                 $regionTextBoxGroup.addClass("hidden");
             } else {
                 $regionDropDownListGroup.addClass("hidden");
                 $regionTextBoxGroup.removeClass("hidden");
             }
+        });
+
+        // On state/province/region selection changed, persiste/restore the selected value so
+        //  that showing/hiding the state/province/region doesn't wipe out the previously
+        //  selected value.
+        $("#RegionDropDownList").on("change", function() {
+            var country = $countryDdl.val();
+
+            selectedRegion[country] = $(this).val();
         });
     });
 

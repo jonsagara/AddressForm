@@ -45,13 +45,6 @@
                     @Html.ValidationMessageFor(m => m.Country)
                 </div>
             </div>
-            <div class="form-group">
-                @Html.LabelFor(m => m.Locality, new { @class = "col-md-3 control-label" })
-                <div class="col-md-9">
-                    @Html.TextBoxFor(m => m.Locality, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(m => m.Locality)
-                </div>
-            </div>
 
             <div id="region-textbox-group" class="form-group @(isUsOrCanada ? "hidden" : string.Empty)">
                 @Html.LabelFor(m => m.RegionTextBox, new { @class = "col-md-3 control-label" })
@@ -68,6 +61,13 @@
                 </div>
             </div>
 
+            <div class="form-group">
+                @Html.LabelFor(m => m.Locality, new { @class = "col-md-3 control-label" })
+                <div class="col-md-9">
+                    @Html.TextBoxFor(m => m.Locality, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Locality)
+                </div>
+            </div>
             <div class="form-group">
                 @Html.LabelFor(m => m.PostalCode, new { @class = "col-md-3 control-label" })
                 <div class="col-md-9">
