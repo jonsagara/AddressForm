@@ -53,5 +53,5 @@
         });
     });
 
-    var regionsByCountry = JSON.parse(@Html.Raw(Json.Encode(Model.RegionsByCountryJson)));
+    var regionsByCountry = $.parseJSON(@Html.Raw(Json.Encode(Model.RegionsByCountryJson)));
 </script>
