@@ -216,6 +216,11 @@
     <Compile Include="Models\Seed\CountrySeeder.cs" />
     <Compile Include="Models\Seed\RegionSeeder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Resources\AddressFormResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AddressFormResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -296,6 +301,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201403082138249_AddCountriesAndRegions.resx">
       <DependentUpon>201403082138249_AddCountriesAndRegions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\AddressFormResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AddressFormResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -1,4 +1,5 @@
-﻿@model AddressForm.MvcWeb.Models.PersonEditorModel
+﻿@using AddressForm.MvcWeb.Resources
+@model AddressForm.MvcWeb.Models.PersonEditorModel
 @{
     Layout = null;
 }
@@ -40,6 +41,21 @@
             } else {
                 $regionDropDownListGroup.addClass("hidden");
                 $regionTextBoxGroup.removeClass("hidden");
+            }
+
+            // Update the labels based on the selected country.
+            if (country === "US") {
+                $("#region-dropdownlist-label").text("@AddressFormResources.RegionLabelUS");
+                $("#locality-label").text("@AddressFormResources.LocalityLabelUS");
+                $("#postalcode-label").text("@AddressFormResources.PostalCodeLabelUS");
+            } else if (country == "CA") {
+                $("#region-dropdownlist-label").text("@AddressFormResources.RegionLabelCA");
+                $("#locality-label").text("@AddressFormResources.LocalityLabelCA");
+                $("#postalcode-label").text("@AddressFormResources.PostalCodeLabelCA");
+            } else {
+                // The Region textbox label is static, and never changes. The Region DDL label is the only one that changes.
+                $("#locality-label").text("@AddressFormResources.LocalityLabelOther");
+                $("#postalcode-label").text("@AddressFormResources.PostalCodeLabelOther");
             }
         });
 
