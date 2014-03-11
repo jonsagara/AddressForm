@@ -9,6 +9,12 @@ namespace AddressForm.MvcWeb
         public void Configuration(IAppBuilder app)
         {
             ConfigureAuth(app);
+
+#if !DEBUG
+            // Only do automatic migrations when in RELEASE mode. When developing, force
+            //  the developer to apply them manually.
+            DoMigrations();
+#endif
         }
     }
 }
