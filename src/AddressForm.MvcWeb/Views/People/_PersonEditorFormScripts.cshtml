@@ -52,6 +52,8 @@
                 $("form").removeData("validator");
                 $("#PostalCode").attr("data-val-postalcoderequiredifcountry", "The @AddressFormResources.PostalCodeLabelUS field is required.");
                 $.validator.unobtrusive.parse(document);
+                // Trigger validation to replace any error messages on PostalCode.
+                $("form").validate().element($("#PostalCode"));
             } else if (country == "CA") {
                 $("#region-dropdownlist-label").text("@AddressFormResources.RegionLabelCA");
                 $("#locality-label").text("@AddressFormResources.LocalityLabelCA");
@@ -60,10 +62,15 @@
                 $("form").removeData("validator");
                 $("#PostalCode").attr("data-val-postalcoderequiredifcountry", "The @AddressFormResources.PostalCodeLabelCA field is required.");
                 $.validator.unobtrusive.parse(document);
+                // Trigger validation to replace any error messages on PostalCode.
+                $("form").validate().element($("#PostalCode"));
             } else {
                 // The Region textbox label is static, and never changes. The Region DDL label is the only one that changes.
                 $("#locality-label").text("@AddressFormResources.LocalityLabelOther");
                 $("#postalcode-label").text("@AddressFormResources.PostalCodeLabelOther");
+
+                // Trigger validation to remove any error messages on PostalCode.
+                $("form").validate().element($("#PostalCode"));
             }
         });
 
