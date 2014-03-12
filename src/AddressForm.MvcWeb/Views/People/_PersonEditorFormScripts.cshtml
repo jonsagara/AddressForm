@@ -43,15 +43,23 @@
                 $regionTextBoxGroup.removeClass("hidden");
             }
 
-            // Update the labels based on the selected country.
+            // Update the labels and ZIP/Postal Code error message based on the selected country.
             if (country === "US") {
                 $("#region-dropdownlist-label").text("@AddressFormResources.RegionLabelUS");
                 $("#locality-label").text("@AddressFormResources.LocalityLabelUS");
                 $("#postalcode-label").text("@AddressFormResources.PostalCodeLabelUS");
+
+                $("form").removeData("validator");
+                $("#PostalCode").attr("data-val-postalcoderequiredifcountry", "The @AddressFormResources.PostalCodeLabelUS field is required.");
+                $.validator.unobtrusive.parse(document);
             } else if (country == "CA") {
                 $("#region-dropdownlist-label").text("@AddressFormResources.RegionLabelCA");
                 $("#locality-label").text("@AddressFormResources.LocalityLabelCA");
                 $("#postalcode-label").text("@AddressFormResources.PostalCodeLabelCA");
+
+                $("form").removeData("validator");
+                $("#PostalCode").attr("data-val-postalcoderequiredifcountry", "The @AddressFormResources.PostalCodeLabelCA field is required.");
+                $.validator.unobtrusive.parse(document);
             } else {
                 // The Region textbox label is static, and never changes. The Region DDL label is the only one that changes.
                 $("#locality-label").text("@AddressFormResources.LocalityLabelOther");

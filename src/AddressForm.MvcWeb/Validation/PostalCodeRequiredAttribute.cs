@@ -4,7 +4,6 @@ using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
 using AddressForm.MvcWeb.Models;
 using AddressForm.MvcWeb.Resources;
-using Microsoft.SqlServer.Server;
 
 namespace AddressForm.MvcWeb.Validation
 {
