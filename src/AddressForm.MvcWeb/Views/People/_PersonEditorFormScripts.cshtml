@@ -43,10 +43,12 @@
                 $regionTextBoxGroup.removeClass("hidden");
             }
 
-            // Update the labels and ZIP/Postal Code error message based on the selected country.
+            // Used to determine whether there are any errors showing, without having to trigger
+            //  validation first.
             var numInvalids = $("form").validate().numberOfInvalids();
 
             if (country === "US") {
+                // Show US-specific labels on Region, Locality, and PostalCode.
                 $("#region-dropdownlist-label").text("@AddressFormResources.RegionLabelUS");
                 $("#locality-label").text("@AddressFormResources.LocalityLabelUS");
                 $("#postalcode-label").text("@AddressFormResources.PostalCodeLabelUS");
@@ -60,6 +62,7 @@
                     $("form").validate().element($("#PostalCode"));
                 }
             } else if (country == "CA") {
+                // Show CA-specific lables on Region, Locality, and PostalCode.
                 $("#region-dropdownlist-label").text("@AddressFormResources.RegionLabelCA");
                 $("#locality-label").text("@AddressFormResources.LocalityLabelCA");
                 $("#postalcode-label").text("@AddressFormResources.PostalCodeLabelCA");
@@ -73,6 +76,7 @@
                     $("form").validate().element($("#PostalCode"));
                 }
             } else {
+                // Show generic labels on Region, Locality, and PostalCode.
                 // The Region textbox label is static, and never changes. The Region DDL label is the only one that changes.
                 $("#locality-label").text("@AddressFormResources.LocalityLabelOther");
                 $("#postalcode-label").text("@AddressFormResources.PostalCodeLabelOther");
@@ -92,6 +96,7 @@
         });
     });
 
+    // If Country is US or CA, require a ZIP / Postal Code.
     $.validator.addMethod("postalcoderequiredifcountry", function(value, element, params) {
         var countryVal = $("#Country").val();
 
