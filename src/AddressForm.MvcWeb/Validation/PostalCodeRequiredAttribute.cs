@@ -7,6 +7,10 @@ using AddressForm.MvcWeb.Resources;
 
 namespace AddressForm.MvcWeb.Validation
 {
+    /// <summary>
+    /// If the selected Country is US or CA, then PostalCode is required. Otherwise, it is optional.
+    /// Includes code for server-side validation and hooking up client-side unobtrusive validation.
+    /// </summary>
     public class PostalCodeRequiredAttribute : ValidationAttribute, IClientValidatable
     {
         private static readonly List<string> CountriesRequiringPostalCode = new List<string> { "US", "CA" }; 

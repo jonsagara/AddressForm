@@ -97,8 +97,9 @@
     });
 
     // If Country is US or CA, require a ZIP / Postal Code.
-    $.validator.addMethod("postalcoderequiredifcountry", function(value, element, params) {
-        var countryVal = $("#Country").val();
+    $.validator.addMethod("postalcoderequiredifcountry", function (value, element, params) {
+        var countryId = $(element).attr("data-val-postalcoderequiredifcountry-countryprop");
+        var countryVal = $("#" + countryId).val();
 
         if (countryVal === "US" || countryVal === "CA") {
             return $.trim(value).length > 0;
