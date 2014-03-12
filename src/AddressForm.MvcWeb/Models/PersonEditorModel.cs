@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web.Mvc;
+using AddressForm.MvcWeb.Validation;
 using Newtonsoft.Json;
 
 namespace AddressForm.MvcWeb.Models
@@ -37,6 +38,7 @@ namespace AddressForm.MvcWeb.Models
         [Display(Name = "State/Province/Region")]
         public string RegionDropDownList { get; set; }
 
+        [PostalCodeRequired(CountryPropertyName = "Country")]
         [StringLength(30)]
         [Display(Name = "Zip/Postal Code")]
         public string PostalCode { get; set; }

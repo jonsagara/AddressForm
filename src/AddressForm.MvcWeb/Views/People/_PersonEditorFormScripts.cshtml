@@ -69,5 +69,21 @@
         });
     });
 
+    $.validator.addMethod("postalcoderequiredifcountry", function(value, element, params) {
+        var countryVal = $("#Country").val();
+
+        if (countryVal === "US" || countryVal === "CA") {
+            return $.trim(value).length > 0;
+        }
+
+        return true;
+    });
+
+    $.validator.unobtrusive.adapters.add("postalcoderequiredifcountry", {}, function (options) {
+        @* The value doesn't matter - we could assign anything. It just needs to be present in the rules dictionary. *@
+        options.rules["postalcoderequiredifcountry"] = true;
+        options.messages["postalcoderequiredifcountry"] = options.message;
+    });
+
     var regionsByCountry = $.parseJSON(@Html.Raw(Json.Encode(Model.RegionsByCountryJson)));
 </script>
