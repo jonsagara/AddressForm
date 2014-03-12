@@ -38,9 +38,12 @@ namespace AddressForm.MvcWeb.Models
         [Display(Name = "State/Province/Region")]
         public string RegionDropDownList { get; set; }
 
-        [PostalCodeRequired(CountryPropertyName = "Country")]
+        /// <summary>
+        /// DisplayName is set at runtime, and is determined by the selected Country. Also, as Country changes,
+        /// JavaScript updates the display name on the page accordingly.
+        /// </summary>
+        [PostalCodeRequired("Country")]
         [StringLength(30)]
-        [Display(Name = "Zip/Postal Code")]
         public string PostalCode { get; set; }
 
         [Required]

@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
+using AddressForm.MvcWeb.Models;
+using AddressForm.MvcWeb.Resources;
 using Microsoft.SqlServer.Server;
 
 namespace AddressForm.MvcWeb.Validation
@@ -10,7 +12,13 @@ namespace AddressForm.MvcWeb.Validation
     {
         private static readonly List<string> CountriesRequiringPostalCode = new List<string> { "US", "CA" }; 
 
-        public string CountryPropertyName { get; set; }
+        private string CountryPropertyName { get; set; }
+
+        public PostalCodeRequiredAttribute(string countryPropertyName)
+            : base("The {0} field is required.")
+        {
+            CountryPropertyName = countryPropertyName;
+        }
 
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {
@@ -20,18 +28,24 @@ namespace AddressForm.MvcWeb.Validation
             {
                 return new RequiredAttribute().IsValid(value)
                     ? ValidationResult.Success
-                    : new ValidationResult(FormatErrorMessage(validationContext.DisplayName));
+                    : new ValidationResult(FormatErrorMessage(country));
             }
 
             return ValidationResult.Success;
         }
 
+        public override string FormatErrorMessage(string countryName)
+        {
+            return string.Format(ErrorMessageString, GetDisplayName(countryName));
+        }
+
         public IEnumerable<ModelClientValidationRule> GetClientValidationRules(ModelMetadata metadata, ControllerContext context)
         {
+            var model = (PersonEditorModel)context.Controller.ViewData.Model;
             var modelClientValRule = new ModelClientValidationRule
             {
                 ValidationType = "postalcoderequiredifcountry",
-                ErrorMessage = FormatErrorMessage(metadata.DisplayName)
+                ErrorMessage = FormatErrorMessage(model.Country)
             };
 
             modelClientValRule.ValidationParameters.Add("countryprop", CountryPropertyName);
@@ -56,6 +70,19 @@ namespace AddressForm.MvcWeb.Validation
 
             var propertyInfo = objectInstance.GetType().GetProperty(countryPropertyName);
             return (string)propertyInfo.GetValue(objectInstance);
+        }
+
+        private string GetDisplayName(string country)
+        {
+            if (CountriesRequiringPostalCode.Contains(country))
+            {
+                // Currently only support U.S. and Canada.
+                return country == "US" 
+                    ? AddressFormResources.PostalCodeLabelUS 
+                    : AddressFormResources.PostalCodeLabelCA;
+            }
+
+            return AddressFormResources.PostalCodeLabelOther;
         }
 
         #endregion
