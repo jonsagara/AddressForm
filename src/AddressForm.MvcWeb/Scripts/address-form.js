@@ -122,7 +122,7 @@ var addressForm = (function () {
                 $regionDdl.append($("<option/>").val(elm.value).text(elm.text));
             });
 
-            // If there is a previously selected state for this country, select it in the ddl.
+            // If there is a previously selected region for this country, select it in the ddl.
             if ($.trim(prevSelectedRegion).length > 0) {
                 $regionDdl.val(prevSelectedRegion);
             }
@@ -136,13 +136,11 @@ var addressForm = (function () {
         updateUi(countryVal);
     });
 
-    // On state/province/region selection changed, persiste/restore the selected value so
+    // On state/province/region selection changed, persist/restore the selected value so
     //  that showing/hiding the state/province/region doesn't wipe out the previously
     //  selected value.
     $("#RegionDropDownList").on("change", function () {
-        var country = $countryDdl.val();
-
-        selectedRegion[country] = $(this).val();
+        selectedRegion[$countryDdl.val()] = $(this).val();
     });
 
 
@@ -151,11 +149,12 @@ var addressForm = (function () {
     // Public functions
     //
 
+    // Initialize with data from the view model.
     init = function (options) {
         // Store the selected region for each country. This is the value at page load time.
         selectedRegion[options.initialCountry] = options.initialRegion;
 
-        // A map of regions by country (Key: country; Value: array of regions). Currently only U.S. and Canada.
+        // A JSON map of regions by country (Key: country; Value: array of regions). Currently only for U.S. and Canada.
         regionsByCountry = options.regionsByCountry;
     };
 
