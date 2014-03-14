@@ -1,4 +1,6 @@
-﻿var addressForm = (function() {
+﻿/*jslint browser: true */
+/*global $:false */
+var addressForm = (function () {
     "use strict";
 
     var init,
@@ -35,7 +37,8 @@
     // Private functions
     //
 
-    // Tests whether a country has regions associated with it.
+    // Tests whether a country has regions associated with it. countryRegions, if defined and not null,
+    //  is an array of regions for a particular country.
     function countryHasRegions(countryRegions) {
         return countryRegions !== undefined && countryRegions !== null && countryRegions.length > 0;
     }
@@ -45,9 +48,58 @@
         if (show === true) {
             $regionDdlGroup.removeClass("hidden");
             $regionTxtGroup.addClass("hidden");
+
         } else {
             $regionDdlGroup.addClass("hidden");
             $regionTxtGroup.removeClass("hidden");
+        }
+    }
+
+    // Update the validator's error message for postal code. If there are already errors visible on
+    //  the form, re-validate the form to ensure that postal code shows up as required if it's not
+    //  already populated.
+    function updateValidator(postalCodeLabel) {
+        // Used Used to determine whether there are any errors showing, without having to trigger validation first.
+        var numInvalids = $form.validate().numberOfInvalids();
+
+        $form.removeData("validator");
+        $postalCode.attr("data-val-postalcoderequiredifcountry", "The " + postalCodeLabel + " field is required.");
+        $.validator.unobtrusive.parse(document);
+
+        if (numInvalids > 0) {
+            // Trigger validation to replace any error messages on PostalCode. Since we reparsed 
+            //  the document, we have to revalidate the whole form.
+            $form.valid();
+        }
+    }
+    
+    // Update the region, locality, and postal code labels for the newly-selected country. Also update
+    //  the validator's error messages to show the appropiate label for postal code.
+    function updateUi(country) {
+        if (country === "US") {
+            // Show US-specific labels on Region, Locality, and PostalCode.
+            $regionDdlLabel.text(resources.regionLabelUS);
+            $localityLabel.text(resources.localityLabelUS);
+            $postalCodeLabel.text(resources.postalCodeLabelUS);
+
+            updateValidator(resources.postalCodeLabelUS);
+
+        } else if (country === "CA") {
+            // Show CA-specific lables on Region, Locality, and PostalCode.
+            $regionDdlLabel.text(resources.regionLabelCA);
+            $localityLabel.text(resources.localityLabelCA);
+            $postalCodeLabel.text(resources.postalCodeLabelCA);
+
+            updateValidator(resources.postalCodeLabelCA);
+
+        } else {
+            // Show generic labels on Region, Locality, and PostalCode.
+            // The Region textbox label is static, and never changes. The Region DDL label is the only one that changes.
+            $localityLabel.text(resources.localityLabelOther);
+            $postalCodeLabel.text(resources.postalCodeLabelOther);
+
+            // Trigger validation to remove any error messages on PostalCode.
+            $form.validate().element($postalCode);
         }
     }
 
@@ -76,52 +128,12 @@
             }
 
             showRegionDdl(true);
+
         } else {
             showRegionDdl(false);
         }
 
-        // Used Used to determine whether there are any errors showing, without having to trigger validation first.
-        var numInvalids = $form.validate().numberOfInvalids();
-
-        if (countryVal === "US") {
-            // Show US-specific labels on Region, Locality, and PostalCode.
-            $regionDdlLabel.text(resources.regionLabelUS);
-            $localityLabel.text(resources.localityLabelUS);
-            $postalCodeLabel.text(resources.postalCodeLabelUS);
-
-            $form.removeData("validator");
-            $postalCode.attr("data-val-postalcoderequiredifcountry", "The " + resources.postalCodeLabelUS + " field is required.");
-            $.validator.unobtrusive.parse(document);
-
-            if (numInvalids > 0) {
-                // Trigger validation to replace any error messages on PostalCode. Since we reparsed 
-                //  the document, we have to revalidate the whole form.
-                $form.valid();
-            }
-        } else if (countryVal === "CA") {
-            // Show CA-specific lables on Region, Locality, and PostalCode.
-            $regionDdlLabel.text(resources.regionLabelCA);
-            $localityLabel.text(resources.localityLabelCA);
-            $postalCodeLabel.text(resources.postalCodeLabelCA);
-
-            $form.removeData("validator");
-            $postalCode.attr("data-val-postalcoderequiredifcountry", "The " + resources.postalCodeLabelCA + " field is required.");
-            $.validator.unobtrusive.parse(document);
-
-            if (numInvalids > 0) {
-                // Trigger validation to replace any error messages on PostalCode. Since we reparsed 
-                //  the document, we have to revalidate the whole form.
-                $form.valid();
-            }
-        } else {
-            // Show generic labels on Region, Locality, and PostalCode.
-            // The Region textbox label is static, and never changes. The Region DDL label is the only one that changes.
-            $localityLabel.text(resources.localityLabelOther);
-            $postalCodeLabel.text(resources.postalCodeLabelOther);
-
-            // Trigger validation to remove any error messages on PostalCode.
-            $form.validate().element($postalCode);
-        }
+        updateUi(countryVal);
     });
 
     // On state/province/region selection changed, persiste/restore the selected value so
