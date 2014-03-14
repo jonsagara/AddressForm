@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web.Mvc;
+using AddressForm.MvcWeb.Resources;
 using AddressForm.MvcWeb.Validation;
 using Newtonsoft.Json;
 
@@ -30,12 +31,20 @@ namespace AddressForm.MvcWeb.Models
         [Display(Name = "City")]
         public string Locality { get; set; }
 
+        /// <summary>
+        /// The Region text box is only shown for countries that don't support picking a region from a DDL, so
+        /// the label never changes.
+        /// </summary>
         [StringLength(50)]
-        [Display(Name = "State/Province/Region")]
+        [Display(ResourceType = typeof(AddressFormResources), Name = "RegionLabelOther")]
         public string RegionTextBox { get; set; }
 
+        /// <summary>
+        /// DisplayName is set at runtime, and is determined by the selected Country. Also, as Country changes,
+        /// JavaScript updates the display name on the page accordingly. Note that the DDL is only visible for 
+        /// countries that support picking a region from a DDL.
+        /// </summary>
         [StringLength(50)]
-        [Display(Name = "State/Province/Region")]
         public string RegionDropDownList { get; set; }
 
         /// <summary>
@@ -75,6 +84,88 @@ namespace AddressForm.MvcWeb.Models
                 );
             }
         }
+
+
+        #region Form Configuration
+
+        private bool IsNew { get { return Id == Guid.Empty; } }
+
+        public string ActionName
+        {
+            get { return IsNew ? "New" : "Edit"; }
+        }
+
+        public string SubmitButtonLabel
+        {
+            get { return IsNew ? "Create Person" : "Save Changes"; }
+        }
+
+
+        private bool IsUS { get { return Country == "US"; } }
+        private bool IsCA { get { return Country == "CA"; } }
+        public bool IsUSorCA { get { return IsUS || IsCA; } }
+
+        /// <summary>
+        /// Label for the Region DDL when it is visible. If US, then State; if CA, then Province; else empty string.
+        /// Note that the Region DDL is hidden when the country doesn't support picking regions from a DDL.
+        /// </summary>
+        public string RegionDdlLabel
+        {
+            get
+            {
+                if (IsUS)
+                {
+                    return AddressFormResources.RegionLabelUS;
+                }
+
+                if (IsCA)
+                {
+                    return AddressFormResources.RegionLabelCA;
+                }
+
+                // Country does not support picking a region from a DDL, so set the label to empty string.
+                //  If the user picks a supported country, JavaScript will properly populate the label.
+                return string.Empty;
+            }
+        }
+
+        public string LocalityLabel
+        {
+            get
+            {
+                if (IsUS)
+                {
+                    return AddressFormResources.LocalityLabelUS;
+                }
+
+                if (IsCA)
+                {
+                    return AddressFormResources.LocalityLabelCA;
+                }
+
+                return AddressFormResources.LocalityLabelOther;
+            }
+        }
+
+        public string PostalCodeLabel
+        {
+            get
+            {
+                if (IsUS)
+                {
+                    return AddressFormResources.PostalCodeLabelUS;
+                }
+
+                if (IsCA)
+                {
+                    return AddressFormResources.PostalCodeLabelCA;
+                }
+
+                return AddressFormResources.PostalCodeLabelOther;
+            }
+        }
+
+        #endregion
 
 
         public PersonEditorModel()
