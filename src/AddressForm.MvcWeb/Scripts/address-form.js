@@ -40,6 +40,7 @@
         return countryRegions !== undefined && countryRegions !== null && countryRegions.length > 0;
     }
 
+    // If true, show the region ddl. Otherwise, show the region textbox.
     function showRegionDdl(show) {
         if (show === true) {
             $regionDdlGroup.removeClass("hidden");
@@ -92,10 +93,9 @@
             $postalCode.attr("data-val-postalcoderequiredifcountry", "The " + resources.postalCodeLabelUS + " field is required.");
             $.validator.unobtrusive.parse(document);
 
-            // Trigger validation to replace any error messages on PostalCode.
             if (numInvalids > 0) {
-                //$form.validate().element($postalCode);
-                // Since we reparsed the document, we have to revalidate the whole form.
+                // Trigger validation to replace any error messages on PostalCode. Since we reparsed 
+                //  the document, we have to revalidate the whole form.
                 $form.valid();
             }
         } else if (countryVal == "CA") {
@@ -108,10 +108,9 @@
             $postalCode.attr("data-val-postalcoderequiredifcountry", "The " + resources.postalCodeLabelCA + " field is required.");
             $.validator.unobtrusive.parse(document);
 
-            // Trigger validation to replace any error messages on PostalCode.
             if (numInvalids > 0) {
-                //$form.validate().element($postalCode);
-                // Since we reparsed the document, we have to revalidate the whole form.
+                // Trigger validation to replace any error messages on PostalCode. Since we reparsed 
+                //  the document, we have to revalidate the whole form.
                 $form.valid();
             }
         } else {
