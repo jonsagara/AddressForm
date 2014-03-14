@@ -98,7 +98,7 @@
                 //  the document, we have to revalidate the whole form.
                 $form.valid();
             }
-        } else if (countryVal == "CA") {
+        } else if (countryVal === "CA") {
             // Show CA-specific lables on Region, Locality, and PostalCode.
             $regionDdlLabel.text(resources.regionLabelCA);
             $localityLabel.text(resources.localityLabelCA);
