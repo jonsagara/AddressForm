@@ -5,114 +5,23 @@
 }
 
 @Scripts.Render("~/bundles/jqueryval")
+<script type="text/javascript" src="~/Scripts/address-form.min.js"></script>
 
 <script type="text/javascript">
-    $(function() {
-        var $regionDropDownListGroup = $("#region-dropdownlist-group"),
-            $regionDropDown = $("#RegionDropDownList"),
-            $regionTextBoxGroup = $("#region-textbox-group"),
-            $countryDdl = $("#Country"),
-            selectedRegion = {};
+    addressForm.resources.regionLabelUS = "@AddressFormResources.RegionLabelUS";
+    addressForm.resources.localityLabelUS = "@AddressFormResources.LocalityLabelUS";
+    addressForm.resources.postalCodeLabelUS = "@AddressFormResources.PostalCodeLabelUS";
+    addressForm.resources.regionLabelCA = "@AddressFormResources.RegionLabelCA";
+    addressForm.resources.localityLabelCA = "@AddressFormResources.LocalityLabelCA";
+    addressForm.resources.postalCodeLabelCA = "@AddressFormResources.PostalCodeLabelCA";
+    addressForm.resources.localityLabelOther = "@AddressFormResources.LocalityLabelOther";
+    addressForm.resources.postalCodeLabelOther = "@AddressFormResources.PostalCodeLabelOther";
 
-        // Initialize with the currently-selected region for the country.
-        selectedRegion["@Model.Country"] = "@Model.RegionDropDownList";
-
-        // On country selection changed, show/hide the dropdownlist/textbox depending on
-        //  whether the selected country has states/provinces/regions defined.
-        $("#Country").on("change", function() {
-            var country = $(this).val(),
-                countryRegions = regionsByCountry[country],
-                prevSelectedRegion = selectedRegion[country];
-
-            if (countryRegions !== undefined && countryRegions !== null && countryRegions.length > 0) {
-                $regionDropDown.empty();
-
-                $.each(countryRegions, function (ix, elm) {
-                    $regionDropDown.append($("<option/>").val(elm.value).text(elm.text));
-                });
-
-                // If there is a previously selected state for this country, select it in the ddl.
-                if (prevSelectedRegion !== undefined && prevSelectedRegion !== null && prevSelectedRegion.length > 0) {
-                    $regionDropDown.val(prevSelectedRegion);
-                }
-
-                $regionDropDownListGroup.removeClass("hidden");
-                $regionTextBoxGroup.addClass("hidden");
-            } else {
-                $regionDropDownListGroup.addClass("hidden");
-                $regionTextBoxGroup.removeClass("hidden");
-            }
-
-            // Used to determine whether there are any errors showing, without having to trigger
-            //  validation first.
-            var numInvalids = $("form").validate().numberOfInvalids();
-
-            if (country === "US") {
-                // Show US-specific labels on Region, Locality, and PostalCode.
-                $("#region-dropdownlist-label").text("@AddressFormResources.RegionLabelUS");
-                $("#locality-label").text("@AddressFormResources.LocalityLabelUS");
-                $("#postalcode-label").text("@AddressFormResources.PostalCodeLabelUS");
-
-                $("form").removeData("validator");
-                $("#PostalCode").attr("data-val-postalcoderequiredifcountry", "The @AddressFormResources.PostalCodeLabelUS field is required.");
-                $.validator.unobtrusive.parse(document);
-
-                // Trigger validation to replace any error messages on PostalCode.
-                if (numInvalids > 0) {
-                    $("form").validate().element($("#PostalCode"));
-                }
-            } else if (country == "CA") {
-                // Show CA-specific lables on Region, Locality, and PostalCode.
-                $("#region-dropdownlist-label").text("@AddressFormResources.RegionLabelCA");
-                $("#locality-label").text("@AddressFormResources.LocalityLabelCA");
-                $("#postalcode-label").text("@AddressFormResources.PostalCodeLabelCA");
-
-                $("form").removeData("validator");
-                $("#PostalCode").attr("data-val-postalcoderequiredifcountry", "The @AddressFormResources.PostalCodeLabelCA field is required.");
-                $.validator.unobtrusive.parse(document);
-
-                // Trigger validation to replace any error messages on PostalCode.
-                if (numInvalids > 0) {
-                    $("form").validate().element($("#PostalCode"));
-                }
-            } else {
-                // Show generic labels on Region, Locality, and PostalCode.
-                // The Region textbox label is static, and never changes. The Region DDL label is the only one that changes.
-                $("#locality-label").text("@AddressFormResources.LocalityLabelOther");
-                $("#postalcode-label").text("@AddressFormResources.PostalCodeLabelOther");
-
-                // Trigger validation to remove any error messages on PostalCode.
-                $("form").validate().element($("#PostalCode"));
-            }
-        });
-
-        // On state/province/region selection changed, persiste/restore the selected value so
-        //  that showing/hiding the state/province/region doesn't wipe out the previously
-        //  selected value.
-        $("#RegionDropDownList").on("change", function() {
-            var country = $countryDdl.val();
-
-            selectedRegion[country] = $(this).val();
+    $(function () {
+        addressForm.init({
+            initialCountry: "@Model.Country",
+            initialRegion: "@Model.RegionDropDownList",
+            regionsByCountry: $.parseJSON(@Html.Raw(Json.Encode(Model.RegionsByCountryJson)))
         });
     });
-
-    // If Country is US or CA, require a ZIP / Postal Code.
-    $.validator.addMethod("postalcoderequiredifcountry", function (value, element, params) {
-        var countryId = $(element).attr("data-val-postalcoderequiredifcountry-countryprop");
-        var countryVal = $("#" + countryId).val();
-
-        if (countryVal === "US" || countryVal === "CA") {
-            return $.trim(value).length > 0;
-        }
-
-        return true;
-    });
-
-    $.validator.unobtrusive.adapters.add("postalcoderequiredifcountry", {}, function (options) {
-        @* The value doesn't matter - we could assign anything. It just needs to be present in the rules dictionary. *@
-        options.rules["postalcoderequiredifcountry"] = true;
-        options.messages["postalcoderequiredifcountry"] = options.message;
-    });
-
-    var regionsByCountry = $.parseJSON(@Html.Raw(Json.Encode(Model.RegionsByCountryJson)));
 </script>
