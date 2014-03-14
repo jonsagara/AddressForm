@@ -15,20 +15,23 @@ namespace AddressForm.MvcWeb.Models
 
         [Required]
         [StringLength(50)]
+        [Display(ResourceType = typeof(AddressFormResources), Name = "NameLabel")]
         public string Name { get; set; }
 
         [Required]
         [StringLength(100)]
-        [Display(Name = "Street Address")]
+        [Display(ResourceType = typeof(AddressFormResources), Name = "StreetAddressLabel")]
         public string StreetAddress { get; set; }
 
         [StringLength(100)]
-        [Display(Name = "Extended Address")]
+        [Display(ResourceType = typeof(AddressFormResources), Name = "ExtendedAddressLabel")]
         public string ExtendedAddress { get; set; }
 
+        /// <summary>
+        /// Display name is set at runtime, and is determined by the selected Country.
+        /// </summary>
         [Required]
         [StringLength(50)]
-        [Display(Name = "City")]
         public string Locality { get; set; }
 
         /// <summary>
@@ -40,7 +43,7 @@ namespace AddressForm.MvcWeb.Models
         public string RegionTextBox { get; set; }
 
         /// <summary>
-        /// DisplayName is set at runtime, and is determined by the selected Country. Also, as Country changes,
+        /// Display name is set at runtime, and is determined by the selected Country. Also, as Country changes,
         /// JavaScript updates the display name on the page accordingly. Note that the DDL is only visible for 
         /// countries that support picking a region from a DDL.
         /// </summary>
@@ -48,7 +51,7 @@ namespace AddressForm.MvcWeb.Models
         public string RegionDropDownList { get; set; }
 
         /// <summary>
-        /// DisplayName is set at runtime, and is determined by the selected Country. Also, as Country changes,
+        /// Display name is set at runtime, and is determined by the selected Country. Also, as Country changes,
         /// JavaScript updates the display name on the page accordingly.
         /// </summary>
         [PostalCodeRequired("Country")]
@@ -57,6 +60,7 @@ namespace AddressForm.MvcWeb.Models
 
         [Required]
         [StringLength(2)]
+        [Display(ResourceType = typeof(AddressFormResources), Name = "CountryLabel")]
         public string Country { get; set; }
 
         public List<SelectListItem> Countries { get; private set; }
@@ -97,7 +101,7 @@ namespace AddressForm.MvcWeb.Models
 
         public string SubmitButtonLabel
         {
-            get { return IsNew ? "Create Person" : "Save Changes"; }
+            get { return IsNew ? AddressFormResources.SubmitButtonLabelNew : AddressFormResources.SubmitButtonLabelEdit; }
         }
 
 
@@ -181,21 +185,20 @@ namespace AddressForm.MvcWeb.Models
         /// <returns></returns>
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
-            const string errorMessage = "State/Province is required";
+            var regionErrorMessage = IsUS ? AddressFormResources.RegionRequiredErrorMessageUS : AddressFormResources.RegionRequiredErrorMessageCA;
+            var postalCodeErrorMessage = IsUS ? AddressFormResources.PostalCodeRequiredErrorMessageUS : AddressFormResources.PostalCodeRequiredErrorMessageCA;
 
-            // If U.S. or Canada, RegionDropDownList is required. Otherwise, RegionTextBox is required.
+            // If U.S. or Canada, RegionDropDownList and PostalCode are required.
             if ((Country == "US" || Country == "CA"))
             {
                 if (string.IsNullOrWhiteSpace(RegionDropDownList))
                 {
-                    yield return new ValidationResult(errorMessage, new[] { "RegionDropDownList" });
+                    yield return new ValidationResult(regionErrorMessage, new[] { "RegionDropDownList" });
                 }
-            }
-            else
-            {
-                if (string.IsNullOrWhiteSpace(RegionTextBox))
+
+                if (string.IsNullOrWhiteSpace(PostalCode))
                 {
-                    yield return new ValidationResult(errorMessage, new[] { "RegionTextBox" });
+                    yield return new ValidationResult(postalCodeErrorMessage, new[] { "PostalCode" });
                 }
             }
         }

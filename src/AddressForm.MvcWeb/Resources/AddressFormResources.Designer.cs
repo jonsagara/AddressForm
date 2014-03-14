@@ -61,6 +61,24 @@ namespace AddressForm.MvcWeb.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Country.
+        /// </summary>
+        public static string CountryLabel {
+            get {
+                return ResourceManager.GetString("CountryLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Extended Address.
+        /// </summary>
+        public static string ExtendedAddressLabel {
+            get {
+                return ResourceManager.GetString("ExtendedAddressLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to City.
         /// </summary>
         public static string LocalityLabelCA {
@@ -84,6 +102,15 @@ namespace AddressForm.MvcWeb.Resources {
         public static string LocalityLabelUS {
             get {
                 return ResourceManager.GetString("LocalityLabelUS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name.
+        /// </summary>
+        public static string NameLabel {
+            get {
+                return ResourceManager.GetString("NameLabel", resourceCulture);
             }
         }
         
@@ -115,6 +142,24 @@ namespace AddressForm.MvcWeb.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The Postal Code field is required..
+        /// </summary>
+        public static string PostalCodeRequiredErrorMessageCA {
+            get {
+                return ResourceManager.GetString("PostalCodeRequiredErrorMessageCA", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The ZIP Code field is required..
+        /// </summary>
+        public static string PostalCodeRequiredErrorMessageUS {
+            get {
+                return ResourceManager.GetString("PostalCodeRequiredErrorMessageUS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Province.
         /// </summary>
         public static string RegionLabelCA {
@@ -138,6 +183,51 @@ namespace AddressForm.MvcWeb.Resources {
         public static string RegionLabelUS {
             get {
                 return ResourceManager.GetString("RegionLabelUS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The Province field is required..
+        /// </summary>
+        public static string RegionRequiredErrorMessageCA {
+            get {
+                return ResourceManager.GetString("RegionRequiredErrorMessageCA", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The State field is required..
+        /// </summary>
+        public static string RegionRequiredErrorMessageUS {
+            get {
+                return ResourceManager.GetString("RegionRequiredErrorMessageUS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Street Address.
+        /// </summary>
+        public static string StreetAddressLabel {
+            get {
+                return ResourceManager.GetString("StreetAddressLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save Changes.
+        /// </summary>
+        public static string SubmitButtonLabelEdit {
+            get {
+                return ResourceManager.GetString("SubmitButtonLabelEdit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Create Person.
+        /// </summary>
+        public static string SubmitButtonLabelNew {
+            get {
+                return ResourceManager.GetString("SubmitButtonLabelNew", resourceCulture);
             }
         }
     }

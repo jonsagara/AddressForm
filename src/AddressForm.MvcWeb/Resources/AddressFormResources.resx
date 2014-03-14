@@ -117,6 +117,12 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="CountryLabel" xml:space="preserve">
+    <value>Country</value>
+  </data>
+  <data name="ExtendedAddressLabel" xml:space="preserve">
+    <value>Extended Address</value>
+  </data>
   <data name="LocalityLabelCA" xml:space="preserve">
     <value>City</value>
   </data>
@@ -125,6 +131,9 @@
   </data>
   <data name="LocalityLabelUS" xml:space="preserve">
     <value>City</value>
+  </data>
+  <data name="NameLabel" xml:space="preserve">
+    <value>Name</value>
   </data>
   <data name="PostalCodeLabelCA" xml:space="preserve">
     <value>Postal Code</value>
@@ -135,6 +144,12 @@
   <data name="PostalCodeLabelUS" xml:space="preserve">
     <value>ZIP Code</value>
   </data>
+  <data name="PostalCodeRequiredErrorMessageCA" xml:space="preserve">
+    <value>The Postal Code field is required.</value>
+  </data>
+  <data name="PostalCodeRequiredErrorMessageUS" xml:space="preserve">
+    <value>The ZIP Code field is required.</value>
+  </data>
   <data name="RegionLabelCA" xml:space="preserve">
     <value>Province</value>
   </data>
@@ -143,5 +158,20 @@
   </data>
   <data name="RegionLabelUS" xml:space="preserve">
     <value>State</value>
+  </data>
+  <data name="RegionRequiredErrorMessageCA" xml:space="preserve">
+    <value>The Province field is required.</value>
+  </data>
+  <data name="RegionRequiredErrorMessageUS" xml:space="preserve">
+    <value>The State field is required.</value>
+  </data>
+  <data name="StreetAddressLabel" xml:space="preserve">
+    <value>Street Address</value>
+  </data>
+  <data name="SubmitButtonLabelEdit" xml:space="preserve">
+    <value>Save Changes</value>
+  </data>
+  <data name="SubmitButtonLabelNew" xml:space="preserve">
+    <value>Create Person</value>
   </data>
 </root>

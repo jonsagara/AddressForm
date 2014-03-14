@@ -29,7 +29,9 @@ var addressForm = (function () {
         localityLabelCA: "",
         postalCodeLabelCA: "",
         localityLabelOther: "",
-        postalCodeLabelOther: ""
+        postalCodeLabelOther: "",
+        postalCodeRequiredErrorMessageUS: "",
+        postalCodeRequiredErrorMessageCA: ""
     };
 
 
@@ -58,12 +60,12 @@ var addressForm = (function () {
     // Update the validator's error message for postal code. If there are already errors visible on
     //  the form, re-validate the form to ensure that postal code shows up as required if it's not
     //  already populated.
-    function updateValidator(postalCodeLabel) {
+    function updateValidator(postalCodeRequiredErrorMessage) {
         // Used Used to determine whether there are any errors showing, without having to trigger validation first.
         var numInvalids = $form.validate().numberOfInvalids();
 
         $form.removeData("validator");
-        $postalCode.attr("data-val-postalcoderequiredifcountry", "The " + postalCodeLabel + " field is required.");
+        $postalCode.attr("data-val-postalcoderequiredifcountry", postalCodeRequiredErrorMessage);
         $.validator.unobtrusive.parse(document);
 
         if (numInvalids > 0) {
@@ -82,7 +84,7 @@ var addressForm = (function () {
             $localityLabel.text(resources.localityLabelUS);
             $postalCodeLabel.text(resources.postalCodeLabelUS);
 
-            updateValidator(resources.postalCodeLabelUS);
+            updateValidator(resources.postalCodeRequiredErrorMessageUS);
 
         } else if (country === "CA") {
             // Show CA-specific lables on Region, Locality, and PostalCode.
@@ -90,7 +92,7 @@ var addressForm = (function () {
             $localityLabel.text(resources.localityLabelCA);
             $postalCodeLabel.text(resources.postalCodeLabelCA);
 
-            updateValidator(resources.postalCodeLabelCA);
+            updateValidator(resources.postalCodeRequiredErrorMessageCA);
 
         } else {
             // Show generic labels on Region, Locality, and PostalCode.
