@@ -8,11 +8,18 @@ namespace AddressForm.MvcWeb
         // For more information on bundling, visit http://go.microsoft.com/fwlink/?LinkId=301862
         public static void RegisterBundles(BundleCollection bundles)
         {
+            bundles.IgnoreList.Ignore("*.map", OptimizationMode.Always);
+
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
                         "~/Scripts/jquery-{version}.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
+
+            // jQuery validation, unobtrusive validation, and the address form script.
+            bundles.Add(new ScriptBundle("~/bundles/jqueryvaladdressform").Include(
+                        "~/Scripts/jquery.validate*",
+                        "~/Scripts/address-form.js"));
 
             // Use the development version of Modernizr to develop with and learn from. Then, when you're
             // ready for production, use the build tool at http://modernizr.com to pick only the tests you need.
