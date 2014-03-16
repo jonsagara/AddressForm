@@ -186,8 +186,8 @@ $.validator.addMethod("postalcoderequiredifcountry", function (value, element, p
 
 $.validator.unobtrusive.adapters.add("postalcoderequiredifcountry", {}, function (options) {
     // The value doesn't matter - we could assign anything. It just needs to be present in the rules dictionary.
-    options.rules["postalcoderequiredifcountry"] = true;
-    options.messages["postalcoderequiredifcountry"] = options.message;
+    options.rules.postalcoderequiredifcountry = true;
+    options.messages.postalcoderequiredifcountry = options.message;
 });
 
 // jQuery validation custom method for Locality. Locality is always required. We had to write
@@ -198,6 +198,6 @@ $.validator.addMethod("localityrequired", function (value, element, params) {
 
 $.validator.unobtrusive.adapters.add("localityrequired", {}, function(options) {
     // The value doesn't matter - we could assign anything. It just needs to be present in the rules dictionary.
-    options.rules["localityrequired"] = true;
-    options.messages["localityrequired"] = options.message;
+    options.rules.localityrequired = true;
+    options.messages.localityrequired = options.message;
 });
