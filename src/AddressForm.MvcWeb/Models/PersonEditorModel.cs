@@ -127,9 +127,13 @@ namespace AddressForm.MvcWeb.Models
                     return AddressFormResources.RegionLabelCA;
                 }
 
-                // Country does not support picking a region from a DDL, so set the label to empty string.
-                //  If the user picks a supported country, JavaScript will properly populate the label.
-                return string.Empty;
+                // Selected country does not support picking a region from a DDL. We still need to default the region 
+                //  DDL lagel to the US's label. We can't make it null or empty, or else LabelFor will not render the 
+                //  label tag. Then, if the user happens to change their country to US, the region DDL will render 
+                //  where the region DDL label should have been (all the way to the left).
+                // JavaScript will update the region DDL label to have the approriate text when the user chooses 
+                //  either US or Canada as a country.
+                return AddressFormResources.RegionLabelUS;
             }
         }
 
