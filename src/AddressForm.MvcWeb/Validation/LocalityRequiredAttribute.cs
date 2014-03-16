@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
 using AddressForm.MvcWeb.Extensions;
@@ -47,7 +46,7 @@ namespace AddressForm.MvcWeb.Validation
                 ErrorMessage = FormatErrorMessage(model.Country)
             };
 
-            //modelClientValRule.ValidationParameters.Add("countryprop", CountryPropertyName);
+            // We don't need to reference country on the client side because Locality is always required, regardless of selected Country.
 
             yield return modelClientValRule;
         }
