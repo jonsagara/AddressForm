@@ -132,6 +132,15 @@
   <data name="LocalityLabelUS" xml:space="preserve">
     <value>City</value>
   </data>
+  <data name="LocalityRequiredErrorMessageCA" xml:space="preserve">
+    <value>The City field is required.</value>
+  </data>
+  <data name="LocalityRequiredErrorMessageOther" xml:space="preserve">
+    <value>The City / Town field is required.</value>
+  </data>
+  <data name="LocalityRequiredErrorMessageUS" xml:space="preserve">
+    <value>The City field is required.</value>
+  </data>
   <data name="NameLabel" xml:space="preserve">
     <value>Name</value>
   </data>

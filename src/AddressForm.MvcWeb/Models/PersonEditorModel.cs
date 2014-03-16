@@ -30,7 +30,7 @@ namespace AddressForm.MvcWeb.Models
         /// <summary>
         /// Display name is set at runtime, and is determined by the selected Country.
         /// </summary>
-        [Required]
+        [LocalityRequired("Country")]
         [StringLength(50)]
         public string Locality { get; set; }
 

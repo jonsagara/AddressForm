@@ -9,16 +9,14 @@ using AddressForm.MvcWeb.Resources;
 namespace AddressForm.MvcWeb.Validation
 {
     /// <summary>
-    /// If the selected Country is US or CA, then PostalCode is required. Otherwise, it is optional.
-    /// Includes code for server-side validation and hooking up client-side unobtrusive validation.
+    /// A custom attribute is required for validating Locality (i.e., City/Town) so that jQuery unobtrusive
+    /// validation and Data Annotations can display an error message appropriate for the selected country.
     /// </summary>
-    public class PostalCodeRequiredAttribute : ValidationAttribute, IClientValidatable
+    public class LocalityRequiredAttribute : ValidationAttribute, IClientValidatable
     {
-        private static readonly List<string> CountriesRequiringPostalCode = new List<string> { "US", "CA" }; 
-
         private string CountryPropertyName { get; set; }
 
-        public PostalCodeRequiredAttribute(string countryPropertyName)
+        public LocalityRequiredAttribute(string countryPropertyName)
             : base("The {0} field is required.")
         {
             CountryPropertyName = countryPropertyName;
@@ -28,14 +26,11 @@ namespace AddressForm.MvcWeb.Validation
         {
             var country = validationContext.ObjectInstance.GetPropertyValue<string>(CountryPropertyName);
 
-            if (CountriesRequiringPostalCode.Contains(country))
-            {
-                return new RequiredAttribute().IsValid(value)
-                    ? ValidationResult.Success
-                    : new ValidationResult(FormatErrorMessage(country));
-            }
+            // Locality is always required. Just format the error message according to country.
 
-            return ValidationResult.Success;
+            return new RequiredAttribute().IsValid(value)
+                ? ValidationResult.Success
+                : new ValidationResult(FormatErrorMessage(country));
         }
 
         public override string FormatErrorMessage(string countryName)
@@ -48,11 +43,11 @@ namespace AddressForm.MvcWeb.Validation
             var model = (PersonEditorModel)context.Controller.ViewData.Model;
             var modelClientValRule = new ModelClientValidationRule
             {
-                ValidationType = "postalcoderequiredifcountry",
+                ValidationType = "localityrequired",
                 ErrorMessage = FormatErrorMessage(model.Country)
             };
 
-            modelClientValRule.ValidationParameters.Add("countryprop", CountryPropertyName);
+            //modelClientValRule.ValidationParameters.Add("countryprop", CountryPropertyName);
 
             yield return modelClientValRule;
         }
@@ -62,15 +57,17 @@ namespace AddressForm.MvcWeb.Validation
 
         private string GetDisplayName(string country)
         {
-            if (CountriesRequiringPostalCode.Contains(country))
+            if (country == "US")
             {
-                // Currently only support U.S. and Canada.
-                return country == "US" 
-                    ? AddressFormResources.PostalCodeLabelUS 
-                    : AddressFormResources.PostalCodeLabelCA;
+                return AddressFormResources.LocalityLabelUS;
             }
 
-            return AddressFormResources.PostalCodeLabelOther;
+            if (country == "CA")
+            {
+                return AddressFormResources.LocalityLabelCA;
+            }
+
+            return AddressFormResources.LocalityLabelOther;
         }
 
         #endregion

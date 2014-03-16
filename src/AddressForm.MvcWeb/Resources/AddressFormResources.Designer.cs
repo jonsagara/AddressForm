@@ -106,6 +106,33 @@ namespace AddressForm.MvcWeb.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The City field is required..
+        /// </summary>
+        public static string LocalityRequiredErrorMessageCA {
+            get {
+                return ResourceManager.GetString("LocalityRequiredErrorMessageCA", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The City / Town field is required..
+        /// </summary>
+        public static string LocalityRequiredErrorMessageOther {
+            get {
+                return ResourceManager.GetString("LocalityRequiredErrorMessageOther", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The City field is required..
+        /// </summary>
+        public static string LocalityRequiredErrorMessageUS {
+            get {
+                return ResourceManager.GetString("LocalityRequiredErrorMessageUS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Name.
         /// </summary>
         public static string NameLabel {

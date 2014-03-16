@@ -9,6 +9,7 @@ var addressForm = (function () {
         $countryDdl = $("#Country"),
         $regionDdl = $("#RegionDropDownList"),
         $regionDdlLabel = $("#region-dropdownlist-label"),
+        $locality = $("#Locality"),
         $localityLabel = $("#locality-label"),
         $postalCode = $("#PostalCode"),
         $postalCodeLabel = $("#postalcode-label"),
@@ -30,6 +31,9 @@ var addressForm = (function () {
         postalCodeLabelCA: "",
         localityLabelOther: "",
         postalCodeLabelOther: "",
+        localityRequiredErrorMessageUS: "",
+        localityRequiredErrorMessageCA: "",
+        localityRequiredErrorMessageOther: "",
         postalCodeRequiredErrorMessageUS: "",
         postalCodeRequiredErrorMessageCA: ""
     };
@@ -60,12 +64,13 @@ var addressForm = (function () {
     // Update the validator's error message for postal code. If there are already errors visible on
     //  the form, re-validate the form to ensure that postal code shows up as required if it's not
     //  already populated.
-    function updateValidator(postalCodeRequiredErrorMessage) {
+    function updateValidator(postalCodeRequiredErrorMsg, localityRequiredErrorMsg) {
         // Used Used to determine whether there are any errors showing, without having to trigger validation first.
         var numInvalids = $form.validate().numberOfInvalids();
 
         $form.removeData("validator");
-        $postalCode.attr("data-val-postalcoderequiredifcountry", postalCodeRequiredErrorMessage);
+        $postalCode.attr("data-val-postalcoderequiredifcountry", postalCodeRequiredErrorMsg);
+        $locality.attr("data-val-localityrequired", localityRequiredErrorMsg);
         $.validator.unobtrusive.parse(document);
 
         if (numInvalids > 0) {
@@ -84,7 +89,7 @@ var addressForm = (function () {
             $localityLabel.text(resources.localityLabelUS);
             $postalCodeLabel.text(resources.postalCodeLabelUS);
 
-            updateValidator(resources.postalCodeRequiredErrorMessageUS);
+            updateValidator(resources.postalCodeRequiredErrorMessageUS, resources.localityRequiredErrorMessageUS);
 
         } else if (country === "CA") {
             // Show CA-specific lables on Region, Locality, and PostalCode.
@@ -92,7 +97,7 @@ var addressForm = (function () {
             $localityLabel.text(resources.localityLabelCA);
             $postalCodeLabel.text(resources.postalCodeLabelCA);
 
-            updateValidator(resources.postalCodeRequiredErrorMessageCA);
+            updateValidator(resources.postalCodeRequiredErrorMessageCA, resources.localityRequiredErrorMessageCA);
 
         } else {
             // Show generic labels on Region, Locality, and PostalCode.
@@ -100,8 +105,8 @@ var addressForm = (function () {
             $localityLabel.text(resources.localityLabelOther);
             $postalCodeLabel.text(resources.postalCodeLabelOther);
 
-            // Trigger validation to remove any error messages on PostalCode.
-            $form.validate().element($postalCode);
+            // Trigger validation to remove any error messages on PostalCode. Update the locality error message text.
+            updateValidator("", resources.localityRequiredErrorMessageOther);
         }
     }
 
@@ -169,8 +174,8 @@ var addressForm = (function () {
 // jQuery validation and unobtrusive validation hookup for validating whether a PostalCode is required.
 // If Country is US or CA, require a ZIP / Postal Code.
 $.validator.addMethod("postalcoderequiredifcountry", function (value, element, params) {
-    var countryId = $(element).attr("data-val-postalcoderequiredifcountry-countryprop");
-    var countryVal = $("#" + countryId).val();
+    var countryId = $(element).attr("data-val-postalcoderequiredifcountry-countryprop"),
+        countryVal = $("#" + countryId).val();
 
     if (countryVal === "US" || countryVal === "CA") {
         return $.trim(value).length > 0;
@@ -183,4 +188,16 @@ $.validator.unobtrusive.adapters.add("postalcoderequiredifcountry", {}, function
     // The value doesn't matter - we could assign anything. It just needs to be present in the rules dictionary.
     options.rules["postalcoderequiredifcountry"] = true;
     options.messages["postalcoderequiredifcountry"] = options.message;
+});
+
+// jQuery validation custom method for Locality. Locality is always required. We had to write
+//  a custom validator in order to dynamically update the form labels and error messages.
+$.validator.addMethod("localityrequired", function (value, element, params) {
+    return $.trim(value).length > 0;
+});
+
+$.validator.unobtrusive.adapters.add("localityrequired", {}, function(options) {
+    // The value doesn't matter - we could assign anything. It just needs to be present in the rules dictionary.
+    options.rules["localityrequired"] = true;
+    options.messages["localityrequired"] = options.message;
 });

@@ -184,6 +184,7 @@
     <Compile Include="Controllers\AddressFormBaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PeopleController.cs" />
+    <Compile Include="Extensions\ObjectExtensions.cs" />
     <Compile Include="Extensions\PersonExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Global.asax.cs">
@@ -223,6 +224,7 @@
       <DependentUpon>AddressFormResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Startup.cs" />
+    <Compile Include="Validation\LocalityRequiredAttribute.cs" />
     <Compile Include="Validation\PostalCodeRequiredAttribute.cs" />
   </ItemGroup>
   <ItemGroup>
