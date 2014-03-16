@@ -20,10 +20,7 @@ namespace AddressForm.MvcWeb.Controllers
                 Country = "US"
             };
 
-            model.Countries.AddRange(Mapper.Map<List<SelectListItem>>(await Context.Countries.OrderBy(c => c.Name).ToListAsync()));
-            model.RegionsByCountry = (await Context.Regions.ToListAsync())
-                .GroupBy(kvp => kvp.CountryId)
-                .ToDictionary(grp => grp.Key, grp => grp.OrderBy(r => r.Name).Select(r => new SelectListItem { Text = r.Name, Value = r.Abbreviation }).ToList());
+            await GetCountryAndRegionData(model);
             
             return View(model);
         }
@@ -43,10 +40,7 @@ namespace AddressForm.MvcWeb.Controllers
                 return RedirectToAction("Index", "Home");
             }
 
-            model.Countries.AddRange(Mapper.Map<List<SelectListItem>>(await Context.Countries.OrderBy(c => c.Name).ToListAsync()));
-            model.RegionsByCountry = (await Context.Regions.ToListAsync())
-                .GroupBy(kvp => kvp.CountryId)
-                .ToDictionary(grp => grp.Key, grp => grp.OrderBy(r => r.Name).Select(r => new SelectListItem { Text = r.Name, Value = r.Abbreviation }).ToList());
+            await GetCountryAndRegionData(model);
 
             return View(model);
         }
@@ -60,10 +54,7 @@ namespace AddressForm.MvcWeb.Controllers
             }
 
             var model = Mapper.Map<Person, PersonEditorModel>(person);
-            model.Countries.AddRange(Mapper.Map<List<SelectListItem>>(await Context.Countries.OrderBy(c => c.Name).ToListAsync()));
-            model.RegionsByCountry = (await Context.Regions.ToListAsync())
-                .GroupBy(kvp => kvp.CountryId)
-                .ToDictionary(grp => grp.Key, grp => grp.OrderBy(r => r.Name).Select(r => new SelectListItem { Text = r.Name, Value = r.Abbreviation }).ToList());
+            await GetCountryAndRegionData(model);
 
             return View(model);
         }
@@ -87,10 +78,7 @@ namespace AddressForm.MvcWeb.Controllers
                 return RedirectToAction("Index", "Home");
             }
 
-            model.Countries.AddRange(Mapper.Map<List<SelectListItem>>(await Context.Countries.OrderBy(c => c.Name).ToListAsync()));
-            model.RegionsByCountry = (await Context.Regions.ToListAsync())
-                .GroupBy(kvp => kvp.CountryId)
-                .ToDictionary(grp => grp.Key, grp => grp.OrderBy(r => r.Name).Select(r => new SelectListItem { Text = r.Name, Value = r.Abbreviation }).ToList());
+            await GetCountryAndRegionData(model);
 
             return View(model);
         }
@@ -132,6 +120,25 @@ namespace AddressForm.MvcWeb.Controllers
         {
             return Context.People
                 .SingleOrDefault(p => p.Id == id);
+        }
+
+        private async Task GetCountryAndRegionData(PersonEditorModel model)
+        {
+            var countries = await Context.Countries
+                .OrderBy(c => c.Name)
+                .ToListAsync();
+
+            model.Countries.AddRange(Mapper.Map<List<SelectListItem>>(countries));
+
+
+            var regions = await Context.Regions.ToListAsync();
+
+            model.RegionsByCountry = regions
+                .GroupBy(kvp => kvp.CountryId)
+                .ToDictionary(
+                    grp => grp.Key,
+                    grp => grp.OrderBy(r => r.Name).Select(Mapper.Map<Region, SelectListItem>).ToList()
+                 );
         }
     }
 }
