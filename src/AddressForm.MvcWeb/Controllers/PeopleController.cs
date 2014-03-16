@@ -43,6 +43,11 @@ namespace AddressForm.MvcWeb.Controllers
                 return RedirectToAction("Index", "Home");
             }
 
+            model.Countries.AddRange(Mapper.Map<List<SelectListItem>>(await Context.Countries.OrderBy(c => c.Name).ToListAsync()));
+            model.RegionsByCountry = (await Context.Regions.ToListAsync())
+                .GroupBy(kvp => kvp.CountryId)
+                .ToDictionary(grp => grp.Key, grp => grp.OrderBy(r => r.Name).Select(r => new SelectListItem { Text = r.Name, Value = r.Abbreviation }).ToList());
+
             return View(model);
         }
 
@@ -81,6 +86,11 @@ namespace AddressForm.MvcWeb.Controllers
 
                 return RedirectToAction("Index", "Home");
             }
+
+            model.Countries.AddRange(Mapper.Map<List<SelectListItem>>(await Context.Countries.OrderBy(c => c.Name).ToListAsync()));
+            model.RegionsByCountry = (await Context.Regions.ToListAsync())
+                .GroupBy(kvp => kvp.CountryId)
+                .ToDictionary(grp => grp.Key, grp => grp.OrderBy(r => r.Name).Select(r => new SelectListItem { Text = r.Name, Value = r.Abbreviation }).ToList());
 
             return View(model);
         }
