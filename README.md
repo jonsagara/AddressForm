@@ -1,6 +1,8 @@
 ## What is this?
 This is an implementation of a mailing address form that explores handling of U.S. and international addresses.
 
+![Address form validating a U.S. address](https://raw.github.com/jonsagara/AddressForm/master/docs/images/form-showing-validation.png)
+
 ## How does it work?
 The following fields make up the form:
 
