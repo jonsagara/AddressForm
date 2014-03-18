@@ -13,4 +13,6 @@ _ReSharper*/
 src/packages/
 *.orig
 ClientBin/
+README.html
+
 
