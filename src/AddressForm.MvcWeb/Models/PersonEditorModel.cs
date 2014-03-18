@@ -36,19 +36,20 @@ namespace AddressForm.MvcWeb.Models
 
         /// <summary>
         /// The Region text box is only shown for countries that don't support picking a region from a DDL, so
-        /// the label never changes.
+        /// the label never changes. Its value will only be used for non-U.S., non-Canadian countries.
         /// </summary>
         [StringLength(50)]
         [Display(ResourceType = typeof(AddressFormResources), Name = "RegionLabelOther")]
-        public string RegionTextBox { get; set; }
+        public string SelectedRegionTextBox { get; set; }
 
         /// <summary>
         /// Display name is set at runtime, and is determined by the selected Country. Also, as Country changes,
         /// JavaScript updates the display name on the page accordingly. Note that the DDL is only visible for 
-        /// countries that support picking a region from a DDL.
+        /// countries that support picking a region from a DDL. Its value will only be used when U.S. or Canada
+        /// is the selected country.
         /// </summary>
         [StringLength(50)]
-        public string RegionDropDownList { get; set; }
+        public string SelectedRegionDdl { get; set; }
 
         /// <summary>
         /// Display name is set at runtime, and is determined by the selected Country. Also, as Country changes,
@@ -192,12 +193,12 @@ namespace AddressForm.MvcWeb.Models
             var regionErrorMessage = IsUS ? AddressFormResources.RegionRequiredErrorMessageUS : AddressFormResources.RegionRequiredErrorMessageCA;
             var postalCodeErrorMessage = IsUS ? AddressFormResources.PostalCodeRequiredErrorMessageUS : AddressFormResources.PostalCodeRequiredErrorMessageCA;
 
-            // If U.S. or Canada, RegionDropDownList and PostalCode are required.
+            // If U.S. or Canada, SelectedRegionDdl and PostalCode are required.
             if ((Country == "US" || Country == "CA"))
             {
-                if (string.IsNullOrWhiteSpace(RegionDropDownList))
+                if (string.IsNullOrWhiteSpace(SelectedRegionDdl))
                 {
-                    yield return new ValidationResult(regionErrorMessage, new[] { "RegionDropDownList" });
+                    yield return new ValidationResult(regionErrorMessage, new[] { "SelectedRegionDdl" });
                 }
 
                 if (string.IsNullOrWhiteSpace(PostalCode))

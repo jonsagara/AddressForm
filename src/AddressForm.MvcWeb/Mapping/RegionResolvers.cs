@@ -15,11 +15,11 @@ namespace AddressForm.MvcWeb.Mapping
             if (source.Country.DoesCountryHaveRegions())
             {
                 // U.S. and Canada are the only two that currently use a drop down list for state/province selection.
-                return source.RegionDropDownList;
+                return source.SelectedRegionDdl;
             }
 
             // All other countries use a free-form text box.
-            return source.RegionTextBox;
+            return source.SelectedRegionTextBox;
         }
     }
 

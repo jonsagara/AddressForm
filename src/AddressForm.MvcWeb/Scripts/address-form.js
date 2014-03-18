@@ -7,7 +7,7 @@ var addressForm = (function () {
         selectedRegion = {},
         regionsByCountry,
         $countryDdl = $("#Country"),
-        $regionDdl = $("#RegionDropDownList"),
+        $regionDdl = $("#SelectedRegionDdl"),
         $regionDdlLabel = $("#region-dropdownlist-label"),
         $locality = $("#Locality"),
         $localityLabel = $("#locality-label"),
@@ -146,7 +146,7 @@ var addressForm = (function () {
     // On state/province/region selection changed, persist/restore the selected value so
     //  that showing/hiding the state/province/region doesn't wipe out the previously
     //  selected value.
-    $("#RegionDropDownList").on("change", function () {
+    $("#SelectedRegionDdl").on("change", function () {
         selectedRegion[$countryDdl.val()] = $(this).val();
     });
 

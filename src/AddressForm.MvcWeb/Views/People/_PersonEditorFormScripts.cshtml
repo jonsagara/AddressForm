@@ -23,7 +23,7 @@
     $(function () {
         addressForm.init({
             initialCountry: "@Model.Country",
-            initialRegion: "@Model.RegionDropDownList",
+            initialRegion: "@Model.SelectedRegionDdl",
             regionsByCountry: $.parseJSON(@Html.Raw(Json.Encode(Model.RegionsByCountryJson)))
         });
     });

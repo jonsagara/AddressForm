@@ -16,7 +16,7 @@ namespace AddressForm.MvcWeb.Controllers
             // Default to California, USA
             var model = new PersonEditorModel
             {
-                RegionDropDownList = "CA",
+                SelectedRegionDdl = "CA",
                 Country = "US"
             };
 
