@@ -1,7 +1,18 @@
 ## What is this?
 This is an implementation of a mailing address form that explores handling of U.S. and international addresses.
 
+### U.S. addresses
+
 ![Address form validating a U.S. address](https://raw.github.com/jonsagara/AddressForm/master/docs/images/form-showing-validation.png)
+
+### Canadian addresses
+
+![Address form validating a Canadian address](https://raw.github.com/jonsagara/AddressForm/master/docs/images/form-showing-validation-ca.png)
+
+### Addresses for all other countries
+
+![Address form validating all other addresses](https://raw.github.com/jonsagara/AddressForm/master/docs/images/form-showing-validation-other.png)
+
 
 ## How does it work?
 The following fields make up the form:
