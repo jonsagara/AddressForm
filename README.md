@@ -1,5 +1,7 @@
 ## What is this?
 This is an implementation of a mailing address form that explores handling of U.S. and international addresses.
+It uses Data Annotations and unobtrusive jQuery validation to validate the fields. Validation rules change
+based on the selected country.
 
 ### U.S. addresses
 
