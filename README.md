@@ -54,7 +54,7 @@ I built AddressForm with the following:
 
 * Visual Studio 2013
 * ASP.NET MVC 5.1.1
-* Entity Framework 6.2.0
+* Entity Framework 6.1.0
 * Bootstrap 3.1.1
 * jQuery 1.11.0
 * jQuery Validation 1.11.1
