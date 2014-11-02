@@ -47,7 +47,7 @@ namespace AddressForm.MvcWeb.Controllers
 
         public async Task<ActionResult> Edit(Guid id)
         {
-            var person = GetPerson(id);
+            var person = await GetPersonAsync(id);
             if (person == null)
             {
                 return HttpNotFound();
@@ -65,7 +65,7 @@ namespace AddressForm.MvcWeb.Controllers
         {
             if (ModelState.IsValid)
             {
-                var person = GetPerson(model.Id);
+                var person = await GetPersonAsync(model.Id);
                 if (person == null)
                 {
                     return HttpNotFound();
@@ -83,9 +83,9 @@ namespace AddressForm.MvcWeb.Controllers
             return View(model);
         }
 
-        public ActionResult Delete(Guid id)
+        public async Task<ActionResult> Delete(Guid id)
         {
-            var person = GetPerson(id);
+            var person = await GetPersonAsync(id);
             if (person == null)
             {
                 return HttpNotFound();
@@ -100,7 +100,7 @@ namespace AddressForm.MvcWeb.Controllers
         {
             if (ModelState.IsValid)
             {
-                var person = GetPerson(model.Id);
+                var person = await GetPersonAsync(model.Id);
                 if (person == null)
                 {
                     return HttpNotFound();
@@ -116,17 +116,19 @@ namespace AddressForm.MvcWeb.Controllers
         }
 
 
-        private Person GetPerson(Guid id)
+        private async Task<Person> GetPersonAsync(Guid id)
         {
-            return Context.People
-                .SingleOrDefault(p => p.Id == id);
+            return await Context.People
+                .SingleOrDefaultAsync(p => p.Id == id)
+                .ConfigureAwait(false);
         }
 
         private async Task GetCountryAndRegionData(PersonEditorModel model)
         {
             var countries = await Context.Countries
                 .OrderBy(c => c.Name)
-                .ToListAsync();
+                .ToListAsync()
+                .ConfigureAwait(false);
 
             model.Countries.AddRange(Mapper.Map<List<SelectListItem>>(countries));
 
