@@ -240,7 +240,6 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\People\New.cshtml" />
     <Content Include="Views\People\Edit.cshtml" />
     <Content Include="Views\People\Delete.cshtml" />
