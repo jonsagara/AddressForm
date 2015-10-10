@@ -52,15 +52,15 @@ What technologies does it use?
 ---
 I built AddressForm with the following:
 
-* Visual Studio 2013
-* ASP.NET MVC 5.1.1
-* Entity Framework 6.1.0
-* Bootstrap 3.1.1
-* jQuery 1.11.0
-* jQuery Validation 1.11.1
-* Microsoft jQuery Unobtrusive Validation 3.1.1
-* Json.NET 6.0.1
-* AutoMapper 3.1.1
+* Visual Studio 2015
+* ASP.NET MVC 5.2.3
+* Entity Framework 6.1.3
+* Bootstrap 3.3.5
+* jQuery 2.1.4
+* jQuery Validation 1.14.0
+* Microsoft jQuery Unobtrusive Validation 3.2.3
+* Json.NET 7.0.1
+* AutoMapper 4.0.4
 
 These packages are not minimum required versions. I'm positive you can adapt the code to work with any reasonably recent version of the above.
 
