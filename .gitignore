@@ -14,5 +14,6 @@ src/packages/
 *.orig
 ClientBin/
 README.html
+.vs/
 
 
